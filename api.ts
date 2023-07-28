@@ -42,6 +42,12 @@ export interface Account {
      */
     'name': string;
     /**
+     * Identifier of the customer
+     * @type {string}
+     * @memberof Account
+     */
+    'customerId': string;
+    /**
      * [ISO_4217](https://en.wikipedia.org/wiki/ISO_4217) code of the currency in which the account must be invoiced Defaults to Base currency. 
      * @type {string}
      * @memberof Account
@@ -169,7 +175,7 @@ export interface AddCurrencyToPricePlanRequest {
      * @type {Array<UsageRate>}
      * @memberof AddCurrencyToPricePlanRequest
      */
-    'usageRates': Array<UsageRate>;
+    'usageRates'?: Array<UsageRate>;
     /**
      * Rates for fixed fee rate cards
      * @type {Array<FixedFeeRate>}
@@ -183,55 +189,23 @@ export interface AddCurrencyToPricePlanRequest {
      */
     'licenseRates'?: Array<LicenseRate>;
     /**
+     * Rates for billing entitlement rate cards
+     * @type {Array<BillingEntitlementRate>}
+     * @memberof AddCurrencyToPricePlanRequest
+     */
+    'billingEntitlementRates'?: Array<BillingEntitlementRate>;
+    /**
      * Rates for minimum commitment.
      * @type {number}
      * @memberof AddCurrencyToPricePlanRequest
      */
     'minimumCommitmentRate'?: number;
-}
-/**
- * 
- * @export
- * @interface AddFeatureCreditsRequest
- */
-export interface AddFeatureCreditsRequest {
     /**
-     * 
-     * @type {AddFeatureCreditsRequestRevenueDetails}
-     * @memberof AddFeatureCreditsRequest
+     * List of slab rates
+     * @type {Array<SlabRate>}
+     * @memberof AddCurrencyToPricePlanRequest
      */
-    'revenueDetails'?: AddFeatureCreditsRequestRevenueDetails;
-    /**
-     * 
-     * @type {Array<FeatureCreditRequest>}
-     * @memberof AddFeatureCreditsRequest
-     */
-    'creditRequests': Array<FeatureCreditRequest>;
-}
-/**
- * Revenue details for feature credits
- * @export
- * @interface AddFeatureCreditsRequestRevenueDetails
- */
-export interface AddFeatureCreditsRequestRevenueDetails {
-    /**
-     * Revenue for feature credits
-     * @type {number}
-     * @memberof AddFeatureCreditsRequestRevenueDetails
-     */
-    'revenue': number;
-    /**
-     * Currency conversion rate for feature credits
-     * @type {number}
-     * @memberof AddFeatureCreditsRequestRevenueDetails
-     */
-    'currencyConversionRate': number;
-    /**
-     * Revenue reference id for feature credits to add in revenue entries
-     * @type {string}
-     * @memberof AddFeatureCreditsRequestRevenueDetails
-     */
-    'revenueReferenceId': string;
+    'rateDetailsRate'?: Array<SlabRate>;
 }
 /**
  * 
@@ -389,6 +363,128 @@ export interface BaseSuccessResponse {
     'success': boolean;
 }
 /**
+ * 
+ * @export
+ * @interface BillingEntitlementRate
+ */
+export interface BillingEntitlementRate {
+    /**
+     * 
+     * @type {string}
+     * @memberof BillingEntitlementRate
+     */
+    'id': string;
+    /**
+     * List of slab rates
+     * @type {Array<SlabRate>}
+     * @memberof BillingEntitlementRate
+     */
+    'slabRates': Array<SlabRate>;
+}
+/**
+ * 
+ * @export
+ * @interface BillingEntitlementRateCard
+ */
+export interface BillingEntitlementRateCard {
+    /**
+     * 
+     * @type {string}
+     * @memberof BillingEntitlementRateCard
+     */
+    'featureId': string;
+    /**
+     * 
+     * @type {Array<FeatureConfig>}
+     * @memberof BillingEntitlementRateCard
+     */
+    'featureConfigs': Array<FeatureConfig>;
+    /**
+     * A tag string to group rate cards
+     * @type {string}
+     * @memberof BillingEntitlementRateCard
+     */
+    'tag'?: string;
+    /**
+     * 
+     * @type {InvoiceTiming}
+     * @memberof BillingEntitlementRateCard
+     */
+    'invoiceTiming': InvoiceTiming;
+    /**
+     * Name your rate card, this will be used in invoice
+     * @type {string}
+     * @memberof BillingEntitlementRateCard
+     */
+    'displayName'?: string;
+    /**
+     * 
+     * @type {RatePlan}
+     * @memberof BillingEntitlementRateCard
+     */
+    'ratePlan': RatePlan;
+    /**
+     * 
+     * @type {Array<RateValue>}
+     * @memberof BillingEntitlementRateCard
+     */
+    'rateValues': Array<RateValue>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface BillingEntitlementRateCardAllOf
+ */
+export interface BillingEntitlementRateCardAllOf {
+    /**
+     * A tag string to group rate cards
+     * @type {string}
+     * @memberof BillingEntitlementRateCardAllOf
+     */
+    'tag'?: string;
+    /**
+     * 
+     * @type {InvoiceTiming}
+     * @memberof BillingEntitlementRateCardAllOf
+     */
+    'invoiceTiming': InvoiceTiming;
+    /**
+     * Name your rate card, this will be used in invoice
+     * @type {string}
+     * @memberof BillingEntitlementRateCardAllOf
+     */
+    'displayName'?: string;
+    /**
+     * 
+     * @type {RatePlan}
+     * @memberof BillingEntitlementRateCardAllOf
+     */
+    'ratePlan': RatePlan;
+    /**
+     * 
+     * @type {Array<RateValue>}
+     * @memberof BillingEntitlementRateCardAllOf
+     */
+    'rateValues': Array<RateValue>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface BillingEntitlementRevenueSummary
+ */
+export interface BillingEntitlementRevenueSummary {
+    /**
+     * 
+     * @type {number}
+     * @memberof BillingEntitlementRevenueSummary
+     */
+    'revenue': number;
+}
+/**
  * Request to get revenue details
  * @export
  * @interface CalculateRevenueRequest
@@ -486,32 +582,6 @@ export interface Computation {
      * @memberof Computation
      */
     'order': number;
-}
-/**
- * 
- * @export
- * @interface ComputeRevenueSummaryRequest
- */
-export interface ComputeRevenueSummaryRequest {
-    /**
-     * 
-     * @type {Array<RevenueSummaryQuery>}
-     * @memberof ComputeRevenueSummaryRequest
-     */
-    'revenueSummaryQueries': Array<RevenueSummaryQuery>;
-}
-/**
- * 
- * @export
- * @interface ComputeRevenueSummaryResponse
- */
-export interface ComputeRevenueSummaryResponse {
-    /**
-     * 
-     * @type {Array<RevenueSummaryResponse>}
-     * @memberof ComputeRevenueSummaryResponse
-     */
-    'revenueSummaryResponses': Array<RevenueSummaryResponse>;
 }
 /**
  * Payload to create account
@@ -882,23 +952,37 @@ export interface CreatePricePlanDetails {
     'licenseRateCards'?: Array<LicenseRateCard>;
     /**
      * 
+     * @type {Array<BillingEntitlementRateCard>}
+     * @memberof CreatePricePlanDetails
+     */
+    'billingEntitlementRateCards'?: Array<BillingEntitlementRateCard>;
+    /**
+     * 
      * @type {MinimumCommitment}
      * @memberof CreatePricePlanDetails
      */
     'minimumCommitment'?: MinimumCommitment;
     /**
      * 
-     * @type {Array<CurrencyRateValue>}
+     * @type {RateDetails}
      * @memberof CreatePricePlanDetails
      */
-    'rateValues'?: Array<CurrencyRateValue>;
+    'rateDetails'?: RateDetails;
     /**
      * 
      * @type {Array<EntitlementRateCard>}
      * @memberof CreatePricePlanDetails
      */
     'entitlementRateCards'?: Array<EntitlementRateCard>;
+    /**
+     * 
+     * @type {PricePlanType}
+     * @memberof CreatePricePlanDetails
+     */
+    'type'?: PricePlanType;
 }
+
+
 /**
  * 
  * @export
@@ -925,6 +1009,12 @@ export interface CreatePricePlanDetailsOverride {
     'usageRateCards'?: Array<UsageRateCard>;
     /**
      * 
+     * @type {Array<BillingEntitlementRateCard>}
+     * @memberof CreatePricePlanDetailsOverride
+     */
+    'billingEntitlementRateCards'?: Array<BillingEntitlementRateCard>;
+    /**
+     * 
      * @type {Array<FixedFeeRateCard>}
      * @memberof CreatePricePlanDetailsOverride
      */
@@ -943,10 +1033,10 @@ export interface CreatePricePlanDetailsOverride {
     'minimumCommitment'?: MinimumCommitment;
     /**
      * 
-     * @type {Array<CurrencyRateValue>}
+     * @type {RateDetails}
      * @memberof CreatePricePlanDetailsOverride
      */
-    'rateValues'?: Array<CurrencyRateValue>;
+    'rateDetails'?: RateDetails;
     /**
      * 
      * @type {Array<EntitlementRateCard>}
@@ -954,6 +1044,53 @@ export interface CreatePricePlanDetailsOverride {
      */
     'entitlementRateCards'?: Array<EntitlementRateCard>;
 }
+/**
+ * Request to migrate all account associations of a price plan to another price plan
+ * @export
+ * @interface CreatePricePlanMigrationRequest
+ */
+export interface CreatePricePlanMigrationRequest {
+    /**
+     * Id of source price plan
+     * @type {string}
+     * @memberof CreatePricePlanMigrationRequest
+     */
+    'sourceId': string;
+    /**
+     * Version of the source price plan
+     * @type {number}
+     * @memberof CreatePricePlanMigrationRequest
+     */
+    'sourceVersion': number;
+    /**
+     * Id of target price plan
+     * @type {string}
+     * @memberof CreatePricePlanMigrationRequest
+     */
+    'targetId': string;
+    /**
+     * Version of the target price plan
+     * @type {number}
+     * @memberof CreatePricePlanMigrationRequest
+     */
+    'targetVersion': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePricePlanMigrationRequest
+     */
+    'migrationMode': CreatePricePlanMigrationRequestMigrationModeEnum;
+}
+
+export const CreatePricePlanMigrationRequestMigrationModeEnum = {
+    Immediate: 'IMMEDIATE',
+    ImmediateIgnoreOverride: 'IMMEDIATE_IGNORE_OVERRIDE',
+    NextCycle: 'NEXT_CYCLE',
+    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE'
+} as const;
+
+export type CreatePricePlanMigrationRequestMigrationModeEnum = typeof CreatePricePlanMigrationRequestMigrationModeEnum[keyof typeof CreatePricePlanMigrationRequestMigrationModeEnum];
+
 /**
  * Request to create a price plan
  * @export
@@ -1763,17 +1900,11 @@ export interface EntitlementRateCard {
      */
     'featureId': string;
     /**
-     * Credit value of the feature
-     * @type {number}
+     * 
+     * @type {Array<FeatureConfig>}
      * @memberof EntitlementRateCard
      */
-    'featureCredits': number;
-    /**
-     * The validity of the credit value of the feature
-     * @type {number}
-     * @memberof EntitlementRateCard
-     */
-    'expiryDurationSeconds': number;
+    'featureConfigs': Array<FeatureConfig>;
 }
 /**
  * 
@@ -1888,6 +2019,12 @@ export interface EventPipelineInfo {
     'customer'?: EventPipelineInfoCustomer;
     /**
      * 
+     * @type {EventPipelineInfoFeatureDetails}
+     * @memberof EventPipelineInfo
+     */
+    'featureDetails'?: EventPipelineInfoFeatureDetails;
+    /**
+     * 
      * @type {EventPipelineInfoEnrichments}
      * @memberof EventPipelineInfo
      */
@@ -1974,6 +2111,25 @@ export interface EventPipelineInfoEventSchema {
      * @memberof EventPipelineInfoEventSchema
      */
     'version': number;
+}
+/**
+ * 
+ * @export
+ * @interface EventPipelineInfoFeatureDetails
+ */
+export interface EventPipelineInfoFeatureDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof EventPipelineInfoFeatureDetails
+     */
+    'featureId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventPipelineInfoFeatureDetails
+     */
+    'mappedAttribute': string;
 }
 /**
  * 
@@ -2443,158 +2599,29 @@ export interface Feature {
     'updatedAt'?: string;
 }
 /**
- * 
+ * Feature configuration object
  * @export
- * @interface FeatureCredit
+ * @interface FeatureConfig
  */
-export interface FeatureCredit {
+export interface FeatureConfig {
     /**
-     * Feature ID
+     * 
      * @type {string}
-     * @memberof FeatureCredit
+     * @memberof FeatureConfig
      */
-    'featureId': string;
+    'effectiveFrom'?: string;
     /**
-     * Customer ID
+     * 
      * @type {string}
-     * @memberof FeatureCredit
-     */
-    'customerId': string;
-    /**
-     * Account ID
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'accountId': string;
-    /**
-     * The id of the entity that granted the units like purchase id, etc
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'referenceId': string;
-    /**
-     * Quantity of feature credits
-     * @type {number}
-     * @memberof FeatureCredit
-     */
-    'units': number;
-    /**
-     * Effective from date
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'effectiveFrom': string;
-    /**
-     * Effective until date
-     * @type {string}
-     * @memberof FeatureCredit
+     * @memberof FeatureConfig
      */
     'effectiveUntil': string;
     /**
-     * Description of feature credits
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'description'?: string;
-    /**
      * 
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FeatureCredit
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @interface FeatureCreditAllOf
- */
-export interface FeatureCreditAllOf {
-    /**
-     * 
-     * @type {string}
-     * @memberof FeatureCreditAllOf
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FeatureCreditAllOf
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
- * @interface FeatureCreditRequest
- */
-export interface FeatureCreditRequest {
-    /**
-     * Feature ID
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'featureId': string;
-    /**
-     * Customer ID
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'customerId': string;
-    /**
-     * Account ID
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'accountId': string;
-    /**
-     * The id of the entity that granted the units like purchase id, etc
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'referenceId': string;
-    /**
-     * Quantity of feature credits
      * @type {number}
-     * @memberof FeatureCreditRequest
+     * @memberof FeatureConfig
      */
-    'units': number;
-    /**
-     * Effective from date
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'effectiveFrom': string;
-    /**
-     * Effective until date
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'effectiveUntil': string;
-    /**
-     * Description of feature credits
-     * @type {string}
-     * @memberof FeatureCreditRequest
-     */
-    'description'?: string;
-}
-/**
- * 
- * @export
- * @interface FeatureCreditsResponse
- */
-export interface FeatureCreditsResponse {
-    /**
-     * 
-     * @type {Array<FeatureCredit>}
-     * @memberof FeatureCreditsResponse
-     */
-    'featureCredits': Array<FeatureCredit>;
+    'featureCreditLimit': number;
 }
 /**
  * details of feature associated with event schema with attribute name
@@ -2633,6 +2660,12 @@ export interface FeatureListResponse {
      * @memberof FeatureListResponse
      */
     'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FeatureListResponse
+     */
+    'schemaCount': number;
     /**
      * 
      * @type {string}
@@ -2761,6 +2794,12 @@ export interface FixedFeeRateCard {
      */
     'displayName'?: string;
     /**
+     * A tag string to group fixedFeeRateCards
+     * @type {string}
+     * @memberof FixedFeeRateCard
+     */
+    'tag'?: string;
+    /**
      * 
      * @type {InvoiceTiming}
      * @memberof FixedFeeRateCard
@@ -2784,9 +2823,28 @@ export interface FixedFeeRateCard {
      * @memberof FixedFeeRateCard
      */
     'enableProration': boolean;
+    /**
+     * 
+     * @type {FixedFeeRateCardConfig}
+     * @memberof FixedFeeRateCard
+     */
+    'config'?: FixedFeeRateCardConfig;
 }
 
 
+/**
+ * 
+ * @export
+ * @interface FixedFeeRateCardConfig
+ */
+export interface FixedFeeRateCardConfig {
+    /**
+     * Represents the number of pricing cycles after which the fixed fee will be charged
+     * @type {number}
+     * @memberof FixedFeeRateCardConfig
+     */
+    'recurrenceInterval'?: number;
+}
 /**
  * 
  * @export
@@ -2869,6 +2927,12 @@ export interface GetFeatureCreditsResponse {
      * @type {number}
      * @memberof GetFeatureCreditsResponse
      */
+    'granted': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetFeatureCreditsResponse
+     */
     'balance': number;
 }
 /**
@@ -2927,6 +2991,215 @@ export interface GetMetricsResponse {
      * @memberof GetMetricsResponse
      */
     'results': Array<MetricQueryResponse>;
+}
+/**
+ * 
+ * @export
+ * @interface GetMigrationResponse
+ */
+export interface GetMigrationResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'status': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'sourceId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'sourceVersion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMigrationResponse
+     */
+    'targetId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'targetVersion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'totalMigrationEntries': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'pendingMigrationEntries': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'failedMigrationEntries': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMigrationResponse
+     */
+    'completedMigrationEntries': number;
+}
+/**
+ * 
+ * @export
+ * @interface GetPurchaseResponse
+ */
+export interface GetPurchaseResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'accountId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'pricePlanId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetPurchaseResponse
+     */
+    'quantity': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'idempotencyKey'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetPurchaseResponse
+     */
+    'pricePlanVersion': number;
+    /**
+     * 
+     * @type {PurchasePlanOverride}
+     * @memberof GetPurchaseResponse
+     */
+    'purchasePlanOverrides'?: PurchasePlanOverride;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetPurchaseResponse
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'invoiceId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponse
+     */
+    'invoiceCurrency'?: string;
+    /**
+     * 
+     * @type {PurchaseStatus}
+     * @memberof GetPurchaseResponse
+     */
+    'status': PurchaseStatus;
+    /**
+     * 
+     * @type {PurchasePlanOverride}
+     * @memberof GetPurchaseResponse
+     */
+    'purchasePlan': PurchasePlanOverride;
+    /**
+     * 
+     * @type {Array<PurchaseFeatureDetails>}
+     * @memberof GetPurchaseResponse
+     */
+    'features': Array<PurchaseFeatureDetails>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface GetPurchaseResponseAllOf
+ */
+export interface GetPurchaseResponseAllOf {
+    /**
+     * 
+     * @type {number}
+     * @memberof GetPurchaseResponseAllOf
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetPurchaseResponseAllOf
+     */
+    'invoiceCurrency'?: string;
+    /**
+     * 
+     * @type {PurchasePlanOverride}
+     * @memberof GetPurchaseResponseAllOf
+     */
+    'purchasePlan': PurchasePlanOverride;
+    /**
+     * 
+     * @type {Array<PurchaseFeatureDetails>}
+     * @memberof GetPurchaseResponseAllOf
+     */
+    'features': Array<PurchaseFeatureDetails>;
 }
 /**
  * Payload for ingesting batch events
@@ -3026,221 +3299,11 @@ export const IngestionStatusStatusEnum = {
     IngestionCompletedNoMatchingMeters: 'INGESTION_COMPLETED_NO_MATCHING_METERS',
     IngestionCompletedEventMetered: 'INGESTION_COMPLETED_EVENT_METERED',
     IngestionCompletedEventNotMetered: 'INGESTION_COMPLETED_EVENT_NOT_METERED',
+    IngestionFailedPastGracePeriod: 'INGESTION_FAILED_PAST_GRACE_PERIOD',
     Unknown: 'UNKNOWN'
 } as const;
 
 export type IngestionStatusStatusEnum = typeof IngestionStatusStatusEnum[keyof typeof IngestionStatusStatusEnum];
-
-/**
- * 
- * @export
- * @interface InternalFixedFeeRateCard
- */
-export interface InternalFixedFeeRateCard {
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'displayName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'currency': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'rate': number;
-    /**
-     * 
-     * @type {InvoiceTiming}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'invoiceTiming': InvoiceTiming;
-    /**
-     * 
-     * @type {FixedFeeType}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'type'?: FixedFeeType;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'enableProration': boolean;
-    /**
-     * number of days into the pricing cycle after which the fixed fee must be applied.
-     * @type {number}
-     * @memberof InternalFixedFeeRateCard
-     */
-    'startPeriod': number;
-}
-
-
-/**
- * 
- * @export
- * @interface InternalLicenseRateCard
- */
-export interface InternalLicenseRateCard {
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalLicenseRateCard
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalLicenseRateCard
-     */
-    'displayName': string;
-    /**
-     * 
-     * @type {PricingModel}
-     * @memberof InternalLicenseRateCard
-     */
-    'pricingModel': PricingModel;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalLicenseRateCard
-     */
-    'currency': string;
-    /**
-     * 
-     * @type {Array<InternalSlab>}
-     * @memberof InternalLicenseRateCard
-     */
-    'internalSlabs': Array<InternalSlab>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InternalLicenseRateCard
-     */
-    'enableProration': boolean;
-}
-
-
-/**
- * 
- * @export
- * @interface InternalSlab
- */
-export interface InternalSlab {
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalSlab
-     */
-    'order': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalSlab
-     */
-    'startAfter': number;
-    /**
-     * 
-     * @type {PriceType}
-     * @memberof InternalSlab
-     */
-    'priceType': PriceType;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof InternalSlab
-     */
-    'slabConfig'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalSlab
-     */
-    'rate': number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof InternalSlab
-     */
-    'slabRateConfig'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalSlab
-     */
-    'endAt'?: number;
-}
-
-
-/**
- * 
- * @export
- * @interface InternalSlabAllOf
- */
-export interface InternalSlabAllOf {
-    /**
-     * 
-     * @type {number}
-     * @memberof InternalSlabAllOf
-     */
-    'endAt'?: number;
-}
-/**
- * 
- * @export
- * @interface InternalUsageRateCard
- */
-export interface InternalUsageRateCard {
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalUsageRateCard
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalUsageRateCard
-     */
-    'displayName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalUsageRateCard
-     */
-    'usageMeterId': string;
-    /**
-     * 
-     * @type {PricingModel}
-     * @memberof InternalUsageRateCard
-     */
-    'pricingModel': PricingModel;
-    /**
-     * 
-     * @type {string}
-     * @memberof InternalUsageRateCard
-     */
-    'currency': string;
-    /**
-     * 
-     * @type {Array<InternalSlab>}
-     * @memberof InternalUsageRateCard
-     */
-    'internalSlabs': Array<InternalSlab>;
-}
-
 
 /**
  * Structure of invoice
@@ -3271,7 +3334,7 @@ export interface Invoice {
      * @type {string}
      * @memberof Invoice
      */
-    'pricePlanId': string;
+    'pricePlanId'?: string;
     /**
      * 
      * @type {Array<InvoiceLineItem>}
@@ -3296,6 +3359,12 @@ export interface Invoice {
      * @memberof Invoice
      */
     'status': InvoiceStatusEnum;
+    /**
+     * Payment status of the invoice
+     * @type {string}
+     * @memberof Invoice
+     */
+    'paymentStatus': InvoicePaymentStatusEnum;
     /**
      * Start date of the invoice
      * @type {string}
@@ -3336,6 +3405,12 @@ export const InvoiceStatusEnum = {
 } as const;
 
 export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceStatusEnum];
+export const InvoicePaymentStatusEnum = {
+    Due: 'DUE',
+    Paid: 'PAID'
+} as const;
+
+export type InvoicePaymentStatusEnum = typeof InvoicePaymentStatusEnum[keyof typeof InvoicePaymentStatusEnum];
 
 /**
  * 
@@ -3360,7 +3435,7 @@ export interface InvoiceDetails {
      * @type {string}
      * @memberof InvoiceDetails
      */
-    'pricePlanName': string;
+    'pricePlanName'?: string;
 }
 /**
  * 
@@ -3447,13 +3522,13 @@ export interface InvoiceLineItem {
      * @type {string}
      * @memberof InvoiceLineItem
      */
-    'units'?: string;
+    'units': string;
     /**
      * 
      * @type {number}
      * @memberof InvoiceLineItem
      */
-    'value'?: number;
+    'value': number;
     /**
      * 
      * @type {{ [key: string]: any; }}
@@ -3467,6 +3542,28 @@ export interface InvoiceLineItem {
      */
     'lineItems': Array<InvoiceLineItem>;
 }
+/**
+ * Payload to update payment information of invoice
+ * @export
+ * @interface InvoicePaymentsRequest
+ */
+export interface InvoicePaymentsRequest {
+    /**
+     * Payment status of the invoice
+     * @type {string}
+     * @memberof InvoicePaymentsRequest
+     */
+    'status': InvoicePaymentsRequestStatusEnum;
+}
+
+export const InvoicePaymentsRequestStatusEnum = {
+    Paid: 'PAID',
+    Void: 'VOID',
+    UnCollectible: 'UN_COLLECTIBLE'
+} as const;
+
+export type InvoicePaymentsRequestStatusEnum = typeof InvoicePaymentsRequestStatusEnum[keyof typeof InvoicePaymentsRequestStatusEnum];
+
 /**
  * If IN_ADVANCE, the fixed fee will be invoiced in the previous billing cycle. If IN_ARREARS, the fixed fee will be invoiced in the current billing cycle. 
  * @export
@@ -3593,25 +3690,6 @@ export interface LicenseEntry {
 /**
  * 
  * @export
- * @interface LicenseEntry1
- */
-export interface LicenseEntry1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof LicenseEntry1
-     */
-    'quantity': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof LicenseEntry1
-     */
-    'effectiveFrom': string;
-}
-/**
- * 
- * @export
  * @interface LicenseRate
  */
 export interface LicenseRate {
@@ -3647,11 +3725,23 @@ export interface LicenseRateCard {
      */
     'displayName'?: string;
     /**
+     * A tag string to group licenseRateCards
+     * @type {string}
+     * @memberof LicenseRateCard
+     */
+    'tag'?: string;
+    /**
      * 
      * @type {boolean}
      * @memberof LicenseRateCard
      */
     'enableProration': boolean;
+    /**
+     * 
+     * @type {LicenseRateCardConfig}
+     * @memberof LicenseRateCard
+     */
+    'config'?: LicenseRateCardConfig;
     /**
      * 
      * @type {RatePlan}
@@ -3664,6 +3754,19 @@ export interface LicenseRateCard {
      * @memberof LicenseRateCard
      */
     'rateValues': Array<RateValue>;
+}
+/**
+ * 
+ * @export
+ * @interface LicenseRateCardConfig
+ */
+export interface LicenseRateCardConfig {
+    /**
+     * Max allowed quantity for a particular license in a price plan
+     * @type {number}
+     * @memberof LicenseRateCardConfig
+     */
+    'maxQuantity'?: number;
 }
 /**
  * 
@@ -4011,6 +4114,62 @@ export interface MetricQueryResponse {
 /**
  * 
  * @export
+ * @interface MigrationsPaginatedResponse
+ */
+export interface MigrationsPaginatedResponse {
+    /**
+     * 
+     * @type {Array<MigrationsWithoutStatusInfo>}
+     * @memberof MigrationsPaginatedResponse
+     */
+    'data'?: Array<MigrationsWithoutStatusInfo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof MigrationsPaginatedResponse
+     */
+    'nextToken'?: string;
+    /**
+     * 
+     * @type {PaginationOptions}
+     * @memberof MigrationsPaginatedResponse
+     */
+    'context'?: PaginationOptions;
+}
+/**
+ * 
+ * @export
+ * @interface MigrationsWithoutStatusInfo
+ */
+export interface MigrationsWithoutStatusInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof MigrationsWithoutStatusInfo
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MigrationsWithoutStatusInfo
+     */
+    'type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MigrationsWithoutStatusInfo
+     */
+    'status': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MigrationsWithoutStatusInfo
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
  * @interface MinimumCommitment
  */
 export interface MinimumCommitment {
@@ -4058,19 +4217,6 @@ export interface MiscellaneousChargesResponse {
      * @memberof MiscellaneousChargesResponse
      */
     'data': Array<MiscellaneousCharge>;
-}
-/**
- * 
- * @export
- * @interface OrganizationSetting
- */
-export interface OrganizationSetting {
-    /**
-     * Base currency of the organization
-     * @type {string}
-     * @memberof OrganizationSetting
-     */
-    'baseCurrency'?: string;
 }
 /**
  * 
@@ -4238,23 +4384,37 @@ export interface PricePlanDetails {
     'licenseRateCards'?: Array<LicenseRateCard>;
     /**
      * 
+     * @type {Array<BillingEntitlementRateCard>}
+     * @memberof PricePlanDetails
+     */
+    'billingEntitlementRateCards'?: Array<BillingEntitlementRateCard>;
+    /**
+     * 
      * @type {MinimumCommitment}
      * @memberof PricePlanDetails
      */
     'minimumCommitment'?: MinimumCommitment;
     /**
      * 
-     * @type {Array<CurrencyRateValue>}
+     * @type {RateDetails}
      * @memberof PricePlanDetails
      */
-    'rateValues'?: Array<CurrencyRateValue>;
+    'rateDetails'?: RateDetails;
     /**
      * 
      * @type {Array<EntitlementRateCard>}
      * @memberof PricePlanDetails
      */
     'entitlementRateCards'?: Array<EntitlementRateCard>;
+    /**
+     * 
+     * @type {PricePlanType}
+     * @memberof PricePlanDetails
+     */
+    'type'?: PricePlanType;
 }
+
+
 /**
  * Configuration for getting the usage rate card
  * @export
@@ -4333,6 +4493,12 @@ export interface PricePlanDetailsOverride {
     'usageRateCards'?: Array<UsageRateCard>;
     /**
      * 
+     * @type {Array<BillingEntitlementRateCard>}
+     * @memberof PricePlanDetailsOverride
+     */
+    'billingEntitlementRateCards'?: Array<BillingEntitlementRateCard>;
+    /**
+     * 
      * @type {Array<FixedFeeRateCard>}
      * @memberof PricePlanDetailsOverride
      */
@@ -4351,10 +4517,10 @@ export interface PricePlanDetailsOverride {
     'minimumCommitment'?: MinimumCommitment;
     /**
      * 
-     * @type {Array<CurrencyRateValue>}
+     * @type {RateDetails}
      * @memberof PricePlanDetailsOverride
      */
-    'rateValues'?: Array<CurrencyRateValue>;
+    'rateDetails'?: RateDetails;
     /**
      * 
      * @type {Array<EntitlementRateCard>}
@@ -4834,6 +5000,81 @@ export interface Purchase {
      * @memberof Purchase
      */
     'updatedAt'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Purchase
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Purchase
+     */
+    'invoiceId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Purchase
+     */
+    'invoiceCurrency'?: string;
+    /**
+     * 
+     * @type {PurchaseStatus}
+     * @memberof Purchase
+     */
+    'status': PurchaseStatus;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface PurchaseFeatureDetails
+ */
+export interface PurchaseFeatureDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseFeatureDetails
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseFeatureDetails
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseFeatureDetails
+     */
+    'creditsGranted': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseFeatureDetails
+     */
+    'creditsAvailable': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseFeatureDetails
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseFeatureDetails
+     */
+    'effectiveFrom': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseFeatureDetails
+     */
+    'effectiveUntil': string;
 }
 /**
  * Represents a Purchase for List Response
@@ -4855,6 +5096,12 @@ export interface PurchaseListResponse {
     'pricePlanId': string;
     /**
      * 
+     * @type {string}
+     * @memberof PurchaseListResponse
+     */
+    'pricePlanName': string;
+    /**
+     * 
      * @type {number}
      * @memberof PurchaseListResponse
      */
@@ -4867,10 +5114,34 @@ export interface PurchaseListResponse {
     'pricePlanVersion': number;
     /**
      * 
+     * @type {PurchaseStatus}
+     * @memberof PurchaseListResponse
+     */
+    'status': PurchaseStatus;
+    /**
+     * 
      * @type {string}
      * @memberof PurchaseListResponse
      */
     'idempotencyKey'?: string;
+    /**
+     * 
+     * @type {PurchasePlanOverride}
+     * @memberof PurchaseListResponse
+     */
+    'purchasePlan': PurchasePlanOverride;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseListResponse
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseListResponse
+     */
+    'invoiceCurrency'?: string;
     /**
      * 
      * @type {string}
@@ -4884,6 +5155,8 @@ export interface PurchaseListResponse {
      */
     'updatedAt'?: string;
 }
+
+
 /**
  * 
  * @export
@@ -4917,16 +5190,50 @@ export interface PurchasePaginatedListData {
 export interface PurchasePlanOverride {
     /**
      * 
-     * @type {Array<CurrencyRateValue>}
+     * @type {RateDetails}
      * @memberof PurchasePlanOverride
      */
-    'rateValues': Array<CurrencyRateValue>;
+    'rateDetails'?: RateDetails;
     /**
      * 
      * @type {Array<EntitlementRateCard>}
      * @memberof PurchasePlanOverride
      */
-    'entitlementRateCards': Array<EntitlementRateCard>;
+    'entitlementRateCards'?: Array<EntitlementRateCard>;
+}
+/**
+ * Status of the purchase
+ * @export
+ * @enum {string}
+ */
+
+export const PurchaseStatus = {
+    Success: 'SUCCESS',
+    Failure: 'FAILURE',
+    Pending: 'PENDING'
+} as const;
+
+export type PurchaseStatus = typeof PurchaseStatus[keyof typeof PurchaseStatus];
+
+
+/**
+ * rate details for a price plan
+ * @export
+ * @interface RateDetails
+ */
+export interface RateDetails {
+    /**
+     * 
+     * @type {Array<RateValue>}
+     * @memberof RateDetails
+     */
+    'rateValues': Array<RateValue>;
+    /**
+     * 
+     * @type {RatePlan}
+     * @memberof RateDetails
+     */
+    'ratePlan': RatePlan;
 }
 /**
  * Contains all rate related configurations
@@ -5007,6 +5314,12 @@ export interface RevenueInfo {
     'licenseRateCard'?: LicenseRateCard;
     /**
      * 
+     * @type {BillingEntitlementRateCard}
+     * @memberof RevenueInfo
+     */
+    'billingEntitlementRateCard'?: BillingEntitlementRateCard;
+    /**
+     * 
      * @type {{ [key: string]: number; }}
      * @memberof RevenueInfo
      */
@@ -5025,288 +5338,16 @@ export interface RevenueInfo {
     'licenseRevenueSummary'?: LicenseRevenueSummary;
     /**
      * 
+     * @type {BillingEntitlementRevenueSummary}
+     * @memberof RevenueInfo
+     */
+    'billingEntitlementRevenueSummary'?: BillingEntitlementRevenueSummary;
+    /**
+     * 
      * @type {Array<SlabRevenueSummary>}
      * @memberof RevenueInfo
      */
     'slabRevenueSummaries'?: Array<SlabRevenueSummary>;
-}
-/**
- * 
- * @export
- * @interface RevenueSummaryQuery
- */
-export interface RevenueSummaryQuery {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQuery
-     */
-    'id': string;
-    /**
-     * 
-     * @type {InternalFixedFeeRateCard}
-     * @memberof RevenueSummaryQuery
-     */
-    'fixedFeeRateCard'?: InternalFixedFeeRateCard;
-    /**
-     * 
-     * @type {InternalUsageRateCard}
-     * @memberof RevenueSummaryQuery
-     */
-    'usageRateCard'?: InternalUsageRateCard;
-    /**
-     * 
-     * @type {InternalLicenseRateCard}
-     * @memberof RevenueSummaryQuery
-     */
-    'licenseRateCard'?: InternalLicenseRateCard;
-    /**
-     * 
-     * @type {RevenueSummaryQueryProrationConfig}
-     * @memberof RevenueSummaryQuery
-     */
-    'prorationConfig'?: RevenueSummaryQueryProrationConfig;
-    /**
-     * 
-     * @type {RevenueSummaryQueryUsages}
-     * @memberof RevenueSummaryQuery
-     */
-    'usages': RevenueSummaryQueryUsages;
-    /**
-     * 
-     * @type {RevenueSummaryQueryLicenseEntries}
-     * @memberof RevenueSummaryQuery
-     */
-    'licenseEntries'?: RevenueSummaryQueryLicenseEntries;
-}
-/**
- * 
- * @export
- * @interface RevenueSummaryQueryLicenseEntries
- */
-export interface RevenueSummaryQueryLicenseEntries {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryLicenseEntries
-     */
-    'mode': RevenueSummaryQueryLicenseEntriesModeEnum;
-    /**
-     * 
-     * @type {RevenueSummaryQueryLicenseEntriesLookUpConfig}
-     * @memberof RevenueSummaryQueryLicenseEntries
-     */
-    'lookUpConfig'?: RevenueSummaryQueryLicenseEntriesLookUpConfig;
-    /**
-     * 
-     * @type {RevenueSummaryQueryLicenseEntriesCustomConfig}
-     * @memberof RevenueSummaryQueryLicenseEntries
-     */
-    'customConfig'?: RevenueSummaryQueryLicenseEntriesCustomConfig;
-}
-
-export const RevenueSummaryQueryLicenseEntriesModeEnum = {
-    Lookup: 'LOOKUP',
-    Custom: 'CUSTOM'
-} as const;
-
-export type RevenueSummaryQueryLicenseEntriesModeEnum = typeof RevenueSummaryQueryLicenseEntriesModeEnum[keyof typeof RevenueSummaryQueryLicenseEntriesModeEnum];
-
-/**
- * License entries for the billing cycle. This will be considered if mode is CUSTOM
- * @export
- * @interface RevenueSummaryQueryLicenseEntriesCustomConfig
- */
-export interface RevenueSummaryQueryLicenseEntriesCustomConfig {
-    /**
-     * 
-     * @type {Array<LicenseEntry1>}
-     * @memberof RevenueSummaryQueryLicenseEntriesCustomConfig
-     */
-    'customLicenseEntries': Array<LicenseEntry1>;
-}
-/**
- * Holder for data required to lookup license entries. This will be considered if mode is LOOKUP
- * @export
- * @interface RevenueSummaryQueryLicenseEntriesLookUpConfig
- */
-export interface RevenueSummaryQueryLicenseEntriesLookUpConfig {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryLicenseEntriesLookUpConfig
-     */
-    'start': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryLicenseEntriesLookUpConfig
-     */
-    'end': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryLicenseEntriesLookUpConfig
-     */
-    'licenseId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryLicenseEntriesLookUpConfig
-     */
-    'accountId': string;
-}
-/**
- * Config for prorated entities. If not provided, revenue will be calculated for the entire billing cycle. 
- * @export
- * @interface RevenueSummaryQueryProrationConfig
- */
-export interface RevenueSummaryQueryProrationConfig {
-    /**
-     * Start date of the billing cycle. This is the date when the billing cycle starts for the customer. 
-     * @type {string}
-     * @memberof RevenueSummaryQueryProrationConfig
-     */
-    'startDate': string;
-    /**
-     * Current date till which revenue is to be prorated. 
-     * @type {string}
-     * @memberof RevenueSummaryQueryProrationConfig
-     */
-    'currentDate': string;
-    /**
-     * End date of the billing cycle. This is the date when the billing cycle ends for the customer. 
-     * @type {string}
-     * @memberof RevenueSummaryQueryProrationConfig
-     */
-    'endDate': string;
-}
-/**
- * 
- * @export
- * @interface RevenueSummaryQueryUsages
- */
-export interface RevenueSummaryQueryUsages {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryUsages
-     */
-    'mode': RevenueSummaryQueryUsagesModeEnum;
-    /**
-     * 
-     * @type {RevenueSummaryQueryUsagesCustomConfig}
-     * @memberof RevenueSummaryQueryUsages
-     */
-    'customConfig'?: RevenueSummaryQueryUsagesCustomConfig;
-    /**
-     * 
-     * @type {RevenueSummaryQueryUsagesLookupConfig}
-     * @memberof RevenueSummaryQueryUsages
-     */
-    'lookupConfig'?: RevenueSummaryQueryUsagesLookupConfig;
-}
-
-export const RevenueSummaryQueryUsagesModeEnum = {
-    Lookup: 'LOOKUP',
-    Custom: 'CUSTOM'
-} as const;
-
-export type RevenueSummaryQueryUsagesModeEnum = typeof RevenueSummaryQueryUsagesModeEnum[keyof typeof RevenueSummaryQueryUsagesModeEnum];
-
-/**
- * Usages map with usageMeterId as key and usage units as value. This will be considered if mode is CUSTOM
- * @export
- * @interface RevenueSummaryQueryUsagesCustomConfig
- */
-export interface RevenueSummaryQueryUsagesCustomConfig {
-    /**
-     * 
-     * @type {{ [key: string]: number; }}
-     * @memberof RevenueSummaryQueryUsagesCustomConfig
-     */
-    'usageMap': { [key: string]: number; };
-}
-/**
- * Holder for data required to lookup usages. This will be considered if mode is LOOKUP
- * @export
- * @interface RevenueSummaryQueryUsagesLookupConfig
- */
-export interface RevenueSummaryQueryUsagesLookupConfig {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryUsagesLookupConfig
-     */
-    'start': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryUsagesLookupConfig
-     */
-    'end': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryQueryUsagesLookupConfig
-     */
-    'accountId': string;
-}
-/**
- * 
- * @export
- * @interface RevenueSummaryResponse
- */
-export interface RevenueSummaryResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryResponse
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RevenueSummaryResponse
-     */
-    'currency': string;
-    /**
-     * 
-     * @type {{ [key: string]: number; }}
-     * @memberof RevenueSummaryResponse
-     */
-    'usages': { [key: string]: number; };
-    /**
-     * 
-     * @type {RevenueSummaryResponseRevenueSummary}
-     * @memberof RevenueSummaryResponse
-     */
-    'revenueSummary': RevenueSummaryResponseRevenueSummary;
-}
-/**
- * 
- * @export
- * @interface RevenueSummaryResponseRevenueSummary
- */
-export interface RevenueSummaryResponseRevenueSummary {
-    /**
-     * 
-     * @type {Array<SlabRevenue>}
-     * @memberof RevenueSummaryResponseRevenueSummary
-     */
-    'slabRevenues'?: Array<SlabRevenue>;
-    /**
-     * 
-     * @type {number}
-     * @memberof RevenueSummaryResponseRevenueSummary
-     */
-    'fixedFeeRevenue'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof RevenueSummaryResponseRevenueSummary
-     */
-    'licenseRevenue'?: number;
 }
 /**
  * Represents a setting
@@ -5401,50 +5442,6 @@ export interface SettingPaginatedResponse {
     'context'?: PaginationOptions;
 }
 /**
- * Payload to signup
- * @export
- * @interface SignupRequest
- */
-export interface SignupRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof SignupRequest
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SignupRequest
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {UserDetails}
-     * @memberof SignupRequest
-     */
-    'userDetails': UserDetails;
-}
-/**
- * Signup response
- * @export
- * @interface SignupResponse
- */
-export interface SignupResponse {
-    /**
-     * Organization Identifier
-     * @type {string}
-     * @memberof SignupResponse
-     */
-    'organizationId': string;
-    /**
-     * Token which can be used for authentication
-     * @type {string}
-     * @memberof SignupResponse
-     */
-    'jwtToken': string;
-}
-/**
  * Represents a pricing priceType (rates + slabs) for usage price plan
  * @export
  * @interface Slab
@@ -5505,37 +5502,6 @@ export interface SlabRate {
 /**
  * 
  * @export
- * @interface SlabRevenue
- */
-export interface SlabRevenue {
-    /**
-     * 
-     * @type {number}
-     * @memberof SlabRevenue
-     */
-    'order': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SlabRevenue
-     */
-    'usage': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SlabRevenue
-     */
-    'revenue': number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof SlabRevenue
-     */
-    'metadata'?: { [key: string]: string; };
-}
-/**
- * 
- * @export
  * @interface SlabRevenueMetadata
  */
 export interface SlabRevenueMetadata {
@@ -5588,52 +5554,6 @@ export interface SlabRevenueSummary {
      * @memberof SlabRevenueSummary
      */
     'metadata'?: SlabRevenueMetadata;
-}
-/**
- * 
- * @export
- * @interface StatusResponse
- */
-export interface StatusResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof StatusResponse
-     */
-    'greeting'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StatusResponse
-     */
-    'date'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StatusResponse
-     */
-    'url'?: string;
-    /**
-     * 
-     * @type {StatusResponseHeaders}
-     * @memberof StatusResponse
-     */
-    'headers'?: StatusResponseHeaders;
-}
-/**
- * 
- * @export
- * @interface StatusResponseHeaders
- */
-export interface StatusResponseHeaders {
-    [key: string]: any;
-
-    /**
-     * 
-     * @type {string}
-     * @memberof StatusResponseHeaders
-     */
-    'Content-Type'?: string;
 }
 /**
  * Payload to update account
@@ -5735,19 +5655,6 @@ export interface UpdateFeatureRequest {
      * @memberof UpdateFeatureRequest
      */
     'schemaAssociations': Array<EventSchemasForFeature>;
-}
-/**
- * 
- * @export
- * @interface UpdateOrganizationSettingRequest
- */
-export interface UpdateOrganizationSettingRequest {
-    /**
-     * Base currency of the organization
-     * @type {string}
-     * @memberof UpdateOrganizationSettingRequest
-     */
-    'baseCurrency': string;
 }
 /**
  * Request to update a price plan
@@ -6186,6 +6093,12 @@ export interface UsageRateCard {
      */
     'displayName': string;
     /**
+     * A tag string to group usageRateCards
+     * @type {string}
+     * @memberof UsageRateCard
+     */
+    'tag'?: string;
+    /**
      * 
      * @type {string}
      * @memberof UsageRateCard
@@ -6203,43 +6116,6 @@ export interface UsageRateCard {
      * @memberof UsageRateCard
      */
     'rateValues': Array<RateValue>;
-}
-/**
- * Root user details for the organization
- * @export
- * @interface UserDetails
- */
-export interface UserDetails {
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDetails
-     */
-    'preferredUsername'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDetails
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDetails
-     */
-    'password': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDetails
-     */
-    'email': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDetails
-     */
-    'phone'?: string;
 }
 
 /**
@@ -6549,6 +6425,50 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * This API let’s you to initiate a purchase for an account
+         * @summary Initiate a purchase
+         * @param {string} accountId account_id corresponding to an account
+         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        initiateOneTimeEntitlementPlan: async (accountId: string, createPurchaseRequest: CreatePurchaseRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('initiateOneTimeEntitlementPlan', 'accountId', accountId)
+            // verify required parameter 'createPurchaseRequest' is not null or undefined
+            assertParamExists('initiateOneTimeEntitlementPlan', 'createPurchaseRequest', createPurchaseRequest)
+            const localVarPath = `/accounts/{account_id}/purchases`
+                .replace(`{${"account_id"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createPurchaseRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get Purchase information for an account using account_id and price_plan_id
          * @summary Get all purchases for an account
          * @param {string} accountId account_id corresponding to an account
@@ -6580,50 +6500,6 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This API let’s you to purchase a one time entitlement plan
-         * @summary Purchase an Entitlement Plan
-         * @param {string} accountId account_id corresponding to an account
-         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to make a purchase
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        purchaseOneTimeEntitlementPlan: async (accountId: string, createPurchaseRequest: CreatePurchaseRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('purchaseOneTimeEntitlementPlan', 'accountId', accountId)
-            // verify required parameter 'createPurchaseRequest' is not null or undefined
-            assertParamExists('purchaseOneTimeEntitlementPlan', 'createPurchaseRequest', createPurchaseRequest)
-            const localVarPath = `/accounts/{account_id}/purchases`
-                .replace(`{${"account_id"}}`, encodeURIComponent(String(accountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createPurchaseRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6895,8 +6771,20 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPurchase(purchaseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Purchase>> {
+        async getPurchase(purchaseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetPurchaseResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPurchase(purchaseId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This API let’s you to initiate a purchase for an account
+         * @summary Initiate a purchase
+         * @param {string} accountId account_id corresponding to an account
+         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async initiateOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Purchase>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.initiateOneTimeEntitlementPlan(accountId, createPurchaseRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6908,18 +6796,6 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          */
         async listAccountPurchases(accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PurchasePaginatedListData>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAccountPurchases(accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * This API let’s you to purchase a one time entitlement plan
-         * @summary Purchase an Entitlement Plan
-         * @param {string} accountId account_id corresponding to an account
-         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to make a purchase
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async purchaseOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Purchase>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseOneTimeEntitlementPlan(accountId, createPurchaseRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7053,8 +6929,19 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPurchase(purchaseId: string, options?: any): AxiosPromise<Purchase> {
+        getPurchase(purchaseId: string, options?: any): AxiosPromise<GetPurchaseResponse> {
             return localVarFp.getPurchase(purchaseId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This API let’s you to initiate a purchase for an account
+         * @summary Initiate a purchase
+         * @param {string} accountId account_id corresponding to an account
+         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        initiateOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: any): AxiosPromise<Purchase> {
+            return localVarFp.initiateOneTimeEntitlementPlan(accountId, createPurchaseRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Get Purchase information for an account using account_id and price_plan_id
@@ -7065,17 +6952,6 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          */
         listAccountPurchases(accountId: string, options?: any): AxiosPromise<PurchasePaginatedListData> {
             return localVarFp.listAccountPurchases(accountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This API let’s you to purchase a one time entitlement plan
-         * @summary Purchase an Entitlement Plan
-         * @param {string} accountId account_id corresponding to an account
-         * @param {CreatePurchaseRequest} createPurchaseRequest Payload to make a purchase
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        purchaseOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: any): AxiosPromise<Purchase> {
-            return localVarFp.purchaseOneTimeEntitlementPlan(accountId, createPurchaseRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Remove existing aliases tagged to an account using this API
@@ -7222,6 +7098,19 @@ export class AccountsApi extends BaseAPI {
     }
 
     /**
+     * This API let’s you to initiate a purchase for an account
+     * @summary Initiate a purchase
+     * @param {string} accountId account_id corresponding to an account
+     * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountsApi
+     */
+    public initiateOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: AxiosRequestConfig) {
+        return AccountsApiFp(this.configuration).initiateOneTimeEntitlementPlan(accountId, createPurchaseRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Get Purchase information for an account using account_id and price_plan_id
      * @summary Get all purchases for an account
      * @param {string} accountId account_id corresponding to an account
@@ -7231,19 +7120,6 @@ export class AccountsApi extends BaseAPI {
      */
     public listAccountPurchases(accountId: string, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration).listAccountPurchases(accountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This API let’s you to purchase a one time entitlement plan
-     * @summary Purchase an Entitlement Plan
-     * @param {string} accountId account_id corresponding to an account
-     * @param {CreatePurchaseRequest} createPurchaseRequest Payload to make a purchase
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AccountsApi
-     */
-    public purchaseOneTimeEntitlementPlan(accountId: string, createPurchaseRequest: CreatePurchaseRequest, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration).purchaseOneTimeEntitlementPlan(accountId, createPurchaseRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10173,6 +10049,50 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * Update payment status in Invoice
+         * @summary Update payment status in Invoice
+         * @param {string} invoiceId 
+         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicePayments: async (invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'invoiceId' is not null or undefined
+            assertParamExists('invoicePayments', 'invoiceId', invoiceId)
+            // verify required parameter 'invoicePaymentsRequest' is not null or undefined
+            assertParamExists('invoicePayments', 'invoicePaymentsRequest', invoicePaymentsRequest)
+            const localVarPath = `/invoices/{invoice_id}/payments`
+                .replace(`{${"invoice_id"}}`, encodeURIComponent(String(invoiceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(invoicePaymentsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * List invoices
          * @summary List invoices
          * @param {string} [nextToken] Pagination token used as a marker to get records from next page.
@@ -10347,6 +10267,18 @@ export const InvoicesApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Update payment status in Invoice
+         * @summary Update payment status in Invoice
+         * @param {string} invoiceId 
+         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Invoice>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invoicePayments(invoiceId, invoicePaymentsRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * List invoices
          * @summary List invoices
          * @param {string} [nextToken] Pagination token used as a marker to get records from next page.
@@ -10408,6 +10340,17 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getInvoice(invoiceId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Update payment status in Invoice
+         * @summary Update payment status in Invoice
+         * @param {string} invoiceId 
+         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: any): AxiosPromise<Invoice> {
+            return localVarFp.invoicePayments(invoiceId, invoicePaymentsRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * List invoices
          * @summary List invoices
          * @param {string} [nextToken] Pagination token used as a marker to get records from next page.
@@ -10465,6 +10408,19 @@ export class InvoicesApi extends BaseAPI {
      */
     public getInvoice(invoiceId: string, options?: AxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).getInvoice(invoiceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update payment status in Invoice
+     * @summary Update payment status in Invoice
+     * @param {string} invoiceId 
+     * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InvoicesApi
+     */
+    public invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: AxiosRequestConfig) {
+        return InvoicesApiFp(this.configuration).invoicePayments(invoiceId, invoicePaymentsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10791,6 +10747,268 @@ export class MetricsApi extends BaseAPI {
      */
     public getMetrics(getMetricsRequest?: GetMetricsRequest, options?: AxiosRequestConfig) {
         return MetricsApiFp(this.configuration).getMetrics(getMetricsRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * MigrationsApi - axios parameter creator
+ * @export
+ */
+export const MigrationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Get the status of a migration
+         * @summary Get the status of a migration
+         * @param {string} migrationId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMigrationStatus: async (migrationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'migrationId' is not null or undefined
+            assertParamExists('getMigrationStatus', 'migrationId', migrationId)
+            const localVarPath = `/migrations/{migration_id}`
+                .replace(`{${"migration_id"}}`, encodeURIComponent(String(migrationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of migrations with pagination and sort.
+         * @summary List migrations
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMigrations: async (nextToken?: string, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/migrations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Migrates accounts which are associated to one price plan to another price plan
+         * @summary Migrates accounts which are associated to one price plan to another price plan
+         * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to update organization setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        migratePricePlan: async (createPricePlanMigrationRequest: CreatePricePlanMigrationRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createPricePlanMigrationRequest' is not null or undefined
+            assertParamExists('migratePricePlan', 'createPricePlanMigrationRequest', createPricePlanMigrationRequest)
+            const localVarPath = `/migrations/price_plan`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createPricePlanMigrationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MigrationsApi - functional programming interface
+ * @export
+ */
+export const MigrationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MigrationsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Get the status of a migration
+         * @summary Get the status of a migration
+         * @param {string} migrationId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMigrationStatus(migrationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetMigrationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMigrationStatus(migrationId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of migrations with pagination and sort.
+         * @summary List migrations
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMigrations(nextToken?: string, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MigrationsPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMigrations(nextToken, pageSize, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Migrates accounts which are associated to one price plan to another price plan
+         * @summary Migrates accounts which are associated to one price plan to another price plan
+         * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to update organization setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async migratePricePlan(createPricePlanMigrationRequest: CreatePricePlanMigrationRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.migratePricePlan(createPricePlanMigrationRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * MigrationsApi - factory interface
+ * @export
+ */
+export const MigrationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MigrationsApiFp(configuration)
+    return {
+        /**
+         * Get the status of a migration
+         * @summary Get the status of a migration
+         * @param {string} migrationId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMigrationStatus(migrationId: string, options?: any): AxiosPromise<GetMigrationResponse> {
+            return localVarFp.getMigrationStatus(migrationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of migrations with pagination and sort.
+         * @summary List migrations
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMigrations(nextToken?: string, pageSize?: number, options?: any): AxiosPromise<MigrationsPaginatedResponse> {
+            return localVarFp.getMigrations(nextToken, pageSize, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Migrates accounts which are associated to one price plan to another price plan
+         * @summary Migrates accounts which are associated to one price plan to another price plan
+         * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to update organization setting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        migratePricePlan(createPricePlanMigrationRequest: CreatePricePlanMigrationRequest, options?: any): AxiosPromise<BaseSuccessResponse> {
+            return localVarFp.migratePricePlan(createPricePlanMigrationRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MigrationsApi - object-oriented interface
+ * @export
+ * @class MigrationsApi
+ * @extends {BaseAPI}
+ */
+export class MigrationsApi extends BaseAPI {
+    /**
+     * Get the status of a migration
+     * @summary Get the status of a migration
+     * @param {string} migrationId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MigrationsApi
+     */
+    public getMigrationStatus(migrationId: string, options?: AxiosRequestConfig) {
+        return MigrationsApiFp(this.configuration).getMigrationStatus(migrationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of migrations with pagination and sort.
+     * @summary List migrations
+     * @param {string} [nextToken] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MigrationsApi
+     */
+    public getMigrations(nextToken?: string, pageSize?: number, options?: AxiosRequestConfig) {
+        return MigrationsApiFp(this.configuration).getMigrations(nextToken, pageSize, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Migrates accounts which are associated to one price plan to another price plan
+     * @summary Migrates accounts which are associated to one price plan to another price plan
+     * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to update organization setting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MigrationsApi
+     */
+    public migratePricePlan(createPricePlanMigrationRequest: CreatePricePlanMigrationRequest, options?: AxiosRequestConfig) {
+        return MigrationsApiFp(this.configuration).migratePricePlan(createPricePlanMigrationRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
