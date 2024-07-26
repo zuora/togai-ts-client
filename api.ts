@@ -8354,16 +8354,17 @@ export interface PricingRulesLog {
     'rule'?: PricingRuleInfo;
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {{ [key: string]: PricingRulesValues; }}
      * @memberof PricingRulesLog
      */
-    'variablesValue'?: { [key: string]: string; };
+    'variablesValue'?: { [key: string]: PricingRulesValues; } | null;
 }
 
 export const PricingRulesLogTypeEnum = {
     ConditionTrue: 'CONDITION_TRUE',
     ConditionFalse: 'CONDITION_FALSE',
-    Error: 'ERROR'
+    ConditionError: 'CONDITION_ERROR',
+    ComputationError: 'COMPUTATION_ERROR'
 } as const;
 
 export type PricingRulesLogTypeEnum = typeof PricingRulesLogTypeEnum[keyof typeof PricingRulesLogTypeEnum];
@@ -8393,6 +8394,25 @@ export interface PricingRulesPaginatedResponse {
      * @memberof PricingRulesPaginatedResponse
      */
     'data': Array<PricingRule>;
+}
+/**
+ * 
+ * @export
+ * @interface PricingRulesValues
+ */
+export interface PricingRulesValues {
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRulesValues
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRulesValues
+     */
+    'value'?: string;
 }
 /**
  * Represents effectiveness period and config of a price plan. i.e, price plan bound by time.
