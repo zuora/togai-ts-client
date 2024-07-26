@@ -1853,6 +1853,12 @@ export interface CreatePricingRule {
      */
     'order': number;
     /**
+     * 
+     * @type {PricingRuleTiming}
+     * @memberof CreatePricingRule
+     */
+    'invoiceTiming'?: PricingRuleTiming;
+    /**
      * JSON logic condition deciding whether to compute this pricing rule or not
      * @type {string}
      * @memberof CreatePricingRule
@@ -1871,6 +1877,8 @@ export interface CreatePricingRule {
      */
     'action': PricingRuleAction;
 }
+
+
 /**
  * 
  * @export
@@ -4604,6 +4612,37 @@ export type FixedFeeType = typeof FixedFeeType[keyof typeof FixedFeeType];
 
 
 /**
+ * Request to get delegate token for customer portal
+ * @export
+ * @interface GetCustomerPortalDelegateTokenRequest
+ */
+export interface GetCustomerPortalDelegateTokenRequest {
+    /**
+     * Identifier of the customer
+     * @type {string}
+     * @memberof GetCustomerPortalDelegateTokenRequest
+     */
+    'customerId': string;
+    /**
+     * Identifier of the accounts under the customer for which access is requested. Maximum of 5 account ids can be provided 
+     * @type {Array<string>}
+     * @memberof GetCustomerPortalDelegateTokenRequest
+     */
+    'accountIds'?: Array<string>;
+    /**
+     * Flag to specify if access for every account under the customer is required
+     * @type {boolean}
+     * @memberof GetCustomerPortalDelegateTokenRequest
+     */
+    'allAccountsAccess'?: boolean;
+    /**
+     * Expiry in seconds from the time of generation.  If not provided, generated token will have the expiry of the token used for requesting. 
+     * @type {number}
+     * @memberof GetCustomerPortalDelegateTokenRequest
+     */
+    'expiry'?: number;
+}
+/**
  * 
  * @export
  * @interface GetEntitlementValuesResponse
@@ -5385,11 +5424,11 @@ export interface Invoice {
      */
     'invoiceDetails'?: InvoiceDetails;
     /**
-     * Status of the invoice
-     * @type {string}
+     * 
+     * @type {InvoicesStatus}
      * @memberof Invoice
      */
-    'status': InvoiceStatusEnum;
+    'status': InvoicesStatus;
     /**
      * 
      * @type {string}
@@ -5397,17 +5436,17 @@ export interface Invoice {
      */
     'finalizingStatus'?: InvoiceFinalizingStatusEnum;
     /**
-     * Represents the class of entity( INVOICE/ORDER/BILLABLE)
-     * @type {string}
+     * 
+     * @type {InvoicesClass}
      * @memberof Invoice
      */
-    'invoiceClass': InvoiceInvoiceClassEnum;
+    'invoiceClass': InvoicesClass;
     /**
-     * Represents the type of entity(STANDARD/AD_HOC/COMPOSITE)
-     * @type {string}
+     * 
+     * @type {InvoicesType}
      * @memberof Invoice
      */
-    'invoiceType': InvoiceInvoiceTypeEnum;
+    'invoiceType': InvoicesType;
     /**
      * 
      * @type {boolean}
@@ -5500,40 +5539,12 @@ export interface Invoice {
     'netTermDays': number;
 }
 
-export const InvoiceStatusEnum = {
-    Draft: 'DRAFT',
-    Due: 'DUE',
-    Paid: 'PAID',
-    Void: 'VOID',
-    UnCollectible: 'UN_COLLECTIBLE',
-    RefundInitiated: 'REFUND_INITIATED',
-    RefundCompleted: 'REFUND_COMPLETED',
-    Merged: 'MERGED',
-    PartiallyPaid: 'PARTIALLY_PAID'
-} as const;
-
-export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceStatusEnum];
 export const InvoiceFinalizingStatusEnum = {
     Finalizing: 'FINALIZING',
     Finalized: 'FINALIZED'
 } as const;
 
 export type InvoiceFinalizingStatusEnum = typeof InvoiceFinalizingStatusEnum[keyof typeof InvoiceFinalizingStatusEnum];
-export const InvoiceInvoiceClassEnum = {
-    Invoice: 'INVOICE',
-    Order: 'ORDER',
-    Billable: 'BILLABLE'
-} as const;
-
-export type InvoiceInvoiceClassEnum = typeof InvoiceInvoiceClassEnum[keyof typeof InvoiceInvoiceClassEnum];
-export const InvoiceInvoiceTypeEnum = {
-    Standard: 'STANDARD',
-    AdHoc: 'AD_HOC',
-    Custom: 'CUSTOM',
-    Composite: 'COMPOSITE'
-} as const;
-
-export type InvoiceInvoiceTypeEnum = typeof InvoiceInvoiceTypeEnum[keyof typeof InvoiceInvoiceTypeEnum];
 
 /**
  * 
@@ -6098,30 +6109,6 @@ export const InvoiceLineItemTypeEnum = {
 export type InvoiceLineItemTypeEnum = typeof InvoiceLineItemTypeEnum[keyof typeof InvoiceLineItemTypeEnum];
 
 /**
- * Payload to update payment information of invoice
- * @export
- * @interface InvoicePaymentsRequest
- */
-export interface InvoicePaymentsRequest {
-    /**
-     * Payment status of the invoice
-     * @type {string}
-     * @memberof InvoicePaymentsRequest
-     */
-    'status': InvoicePaymentsRequestStatusEnum;
-}
-
-export const InvoicePaymentsRequestStatusEnum = {
-    Paid: 'PAID',
-    Void: 'VOID',
-    UnCollectible: 'UN_COLLECTIBLE',
-    RefundInitiated: 'REFUND_INITIATED',
-    RefundCompleted: 'REFUND_COMPLETED'
-} as const;
-
-export type InvoicePaymentsRequestStatusEnum = typeof InvoicePaymentsRequestStatusEnum[keyof typeof InvoicePaymentsRequestStatusEnum];
-
-/**
  * Structure of invoice response
  * @export
  * @interface InvoiceSummary
@@ -6152,11 +6139,11 @@ export interface InvoiceSummary {
      */
     'pricePlanId'?: string;
     /**
-     * Status of the invoice
-     * @type {string}
+     * 
+     * @type {InvoicesStatus}
      * @memberof InvoiceSummary
      */
-    'status': InvoiceSummaryStatusEnum;
+    'status': InvoicesStatus;
     /**
      * 
      * @type {string}
@@ -6164,17 +6151,17 @@ export interface InvoiceSummary {
      */
     'finalizingStatus'?: InvoiceSummaryFinalizingStatusEnum;
     /**
-     * Represents the class of entity( INVOICE/ORDER/BILLABLE)
-     * @type {string}
+     * 
+     * @type {InvoicesClass}
      * @memberof InvoiceSummary
      */
-    'invoiceClass': InvoiceSummaryInvoiceClassEnum;
+    'invoiceClass': InvoicesClass;
     /**
-     * Represents the type of entity(STANDARD/AD_HOC/COMPOSITE)
-     * @type {string}
+     * 
+     * @type {InvoicesType}
      * @memberof InvoiceSummary
      */
-    'invoiceType': InvoiceSummaryInvoiceTypeEnum;
+    'invoiceType': InvoicesType;
     /**
      * Start date of the invoice
      * @type {string}
@@ -6255,40 +6242,12 @@ export interface InvoiceSummary {
     'netTermDays': number;
 }
 
-export const InvoiceSummaryStatusEnum = {
-    Draft: 'DRAFT',
-    Due: 'DUE',
-    Paid: 'PAID',
-    Void: 'VOID',
-    UnCollectible: 'UN_COLLECTIBLE',
-    RefundInitiated: 'REFUND_INITIATED',
-    RefundCompleted: 'REFUND_COMPLETED',
-    Merged: 'MERGED',
-    PartiallyPaid: 'PARTIALLY_PAID'
-} as const;
-
-export type InvoiceSummaryStatusEnum = typeof InvoiceSummaryStatusEnum[keyof typeof InvoiceSummaryStatusEnum];
 export const InvoiceSummaryFinalizingStatusEnum = {
     Finalizing: 'FINALIZING',
     Finalized: 'FINALIZED'
 } as const;
 
 export type InvoiceSummaryFinalizingStatusEnum = typeof InvoiceSummaryFinalizingStatusEnum[keyof typeof InvoiceSummaryFinalizingStatusEnum];
-export const InvoiceSummaryInvoiceClassEnum = {
-    Invoice: 'INVOICE',
-    Order: 'ORDER',
-    Billable: 'BILLABLE'
-} as const;
-
-export type InvoiceSummaryInvoiceClassEnum = typeof InvoiceSummaryInvoiceClassEnum[keyof typeof InvoiceSummaryInvoiceClassEnum];
-export const InvoiceSummaryInvoiceTypeEnum = {
-    Standard: 'STANDARD',
-    AdHoc: 'AD_HOC',
-    Custom: 'CUSTOM',
-    Composite: 'COMPOSITE'
-} as const;
-
-export type InvoiceSummaryInvoiceTypeEnum = typeof InvoiceSummaryInvoiceTypeEnum[keyof typeof InvoiceSummaryInvoiceTypeEnum];
 
 /**
  * If IN_ADVANCE, the rate card will be invoiced in the previous billing cycle. If IN_ARREARS, the rate card will be invoiced in the current billing cycle. If PREPAID, credits/entitlements will be granted only after invoice is paid 
@@ -6303,6 +6262,60 @@ export const InvoiceTiming = {
 } as const;
 
 export type InvoiceTiming = typeof InvoiceTiming[keyof typeof InvoiceTiming];
+
+
+/**
+ * Represents the class of entity( INVOICE/ORDER/BILLABLE)
+ * @export
+ * @enum {string}
+ */
+
+export const InvoicesClass = {
+    Invoice: 'INVOICE',
+    Order: 'ORDER',
+    Billable: 'BILLABLE'
+} as const;
+
+export type InvoicesClass = typeof InvoicesClass[keyof typeof InvoicesClass];
+
+
+/**
+ * Status of the invoice
+ * @export
+ * @enum {string}
+ */
+
+export const InvoicesStatus = {
+    Draft: 'DRAFT',
+    Due: 'DUE',
+    Paid: 'PAID',
+    Void: 'VOID',
+    UnCollectible: 'UN_COLLECTIBLE',
+    RefundInitiated: 'REFUND_INITIATED',
+    RefundCompleted: 'REFUND_COMPLETED',
+    Merged: 'MERGED',
+    PartiallyPaid: 'PARTIALLY_PAID'
+} as const;
+
+export type InvoicesStatus = typeof InvoicesStatus[keyof typeof InvoicesStatus];
+
+
+/**
+ * Represents the type of entity(STANDARD/AD_HOC/COMPOSITE)
+ * @export
+ * @enum {string}
+ */
+
+export const InvoicesType = {
+    Standard: 'STANDARD',
+    AdHoc: 'AD_HOC',
+    Custom: 'CUSTOM',
+    Composite: 'COMPOSITE',
+    StandardAdvanced: 'STANDARD_ADVANCED',
+    AdhocAdvanced: 'ADHOC_ADVANCED'
+} as const;
+
+export type InvoicesType = typeof InvoicesType[keyof typeof InvoicesType];
 
 
 /**
@@ -8133,6 +8146,12 @@ export interface PricingRule {
     'version': number;
     /**
      * 
+     * @type {PricingRuleTiming}
+     * @memberof PricingRule
+     */
+    'invoiceTiming'?: PricingRuleTiming;
+    /**
+     * 
      * @type {number}
      * @memberof PricingRule
      */
@@ -8156,6 +8175,8 @@ export interface PricingRule {
      */
     'action': PricingRuleAction;
 }
+
+
 /**
  * 
  * @export
@@ -8215,6 +8236,12 @@ export interface PricingRuleChangesLog {
     'key': string;
     /**
      * 
+     * @type {string}
+     * @memberof PricingRuleChangesLog
+     */
+    'keyName'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof PricingRuleChangesLog
      */
@@ -8245,6 +8272,51 @@ export interface PricingRuleChangesLog {
     'errorMessage'?: string;
 }
 /**
+ * Pricing Rule Info
+ * @export
+ * @interface PricingRuleInfo
+ */
+export interface PricingRuleInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRuleInfo
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRuleInfo
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRuleInfo
+     */
+    'condition'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRuleInfo
+     */
+    'computation'?: string;
+}
+/**
+ * If IN_ADVANCE, the rule will be applied on rate cards with invoice timing IN_ADVANCE . If IN_ARREARS, the rule will be applied on rate cards with invoice timing IN_ARREARS . 
+ * @export
+ * @enum {string}
+ */
+
+export const PricingRuleTiming = {
+    IN_ADVANCE: 'IN_ADVANCE',
+    IN_ARREARS: 'IN_ARREARS'
+} as const;
+
+export type PricingRuleTiming = typeof PricingRuleTiming[keyof typeof PricingRuleTiming];
+
+
+/**
  * Pricing Rules Logs
  * @export
  * @interface PricingRulesLog
@@ -8261,13 +8333,7 @@ export interface PricingRulesLog {
      * @type {string}
      * @memberof PricingRulesLog
      */
-    'ruleId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PricingRulesLog
-     */
-    'ruleName'?: string;
+    'type'?: PricingRulesLogTypeEnum;
     /**
      * 
      * @type {number}
@@ -8280,7 +8346,29 @@ export interface PricingRulesLog {
      * @memberof PricingRulesLog
      */
     'changes': PricingRuleChangesLog;
+    /**
+     * 
+     * @type {PricingRuleInfo}
+     * @memberof PricingRulesLog
+     */
+    'rule'?: PricingRuleInfo;
+    /**
+     * 
+     * @type {{ [key: string]: PricingRulesValues; }}
+     * @memberof PricingRulesLog
+     */
+    'variablesValue'?: { [key: string]: PricingRulesValues; } | null;
 }
+
+export const PricingRulesLogTypeEnum = {
+    ConditionTrue: 'CONDITION_TRUE',
+    ConditionFalse: 'CONDITION_FALSE',
+    ConditionError: 'CONDITION_ERROR',
+    ComputationError: 'COMPUTATION_ERROR'
+} as const;
+
+export type PricingRulesLogTypeEnum = typeof PricingRulesLogTypeEnum[keyof typeof PricingRulesLogTypeEnum];
+
 /**
  * Pricing Rules Logs response
  * @export
@@ -8306,6 +8394,25 @@ export interface PricingRulesPaginatedResponse {
      * @memberof PricingRulesPaginatedResponse
      */
     'data': Array<PricingRule>;
+}
+/**
+ * 
+ * @export
+ * @interface PricingRulesValues
+ */
+export interface PricingRulesValues {
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRulesValues
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricingRulesValues
+     */
+    'value'?: string;
 }
 /**
  * Represents effectiveness period and config of a price plan. i.e, price plan bound by time.
@@ -10041,7 +10148,8 @@ export const UpdateInvoiceRequestStatusEnum = {
     Due: 'DUE',
     Paid: 'PAID',
     Void: 'VOID',
-    UnCollectible: 'UN_COLLECTIBLE'
+    UnCollectible: 'UN_COLLECTIBLE',
+    RefundInitiated: 'REFUND_INITIATED'
 } as const;
 
 export type UpdateInvoiceRequestStatusEnum = typeof UpdateInvoiceRequestStatusEnum[keyof typeof UpdateInvoiceRequestStatusEnum];
@@ -13707,6 +13815,117 @@ export class CreditsApi extends BaseAPI {
 
 
 /**
+ * CustomerPortalApi - axios parameter creator
+ * @export
+ */
+export const CustomerPortalApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Get delegate token for customer portal
+         * @summary Get delegate token for customer portal
+         * @param {GetCustomerPortalDelegateTokenRequest} getCustomerPortalDelegateTokenRequest Payload to get delegate token for customer portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomerPortalDelegateToken: async (getCustomerPortalDelegateTokenRequest: GetCustomerPortalDelegateTokenRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'getCustomerPortalDelegateTokenRequest' is not null or undefined
+            assertParamExists('getCustomerPortalDelegateToken', 'getCustomerPortalDelegateTokenRequest', getCustomerPortalDelegateTokenRequest)
+            const localVarPath = `/portal/token`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(getCustomerPortalDelegateTokenRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CustomerPortalApi - functional programming interface
+ * @export
+ */
+export const CustomerPortalApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CustomerPortalApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Get delegate token for customer portal
+         * @summary Get delegate token for customer portal
+         * @param {GetCustomerPortalDelegateTokenRequest} getCustomerPortalDelegateTokenRequest Payload to get delegate token for customer portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest: GetCustomerPortalDelegateTokenRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CustomerPortalApi - factory interface
+ * @export
+ */
+export const CustomerPortalApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CustomerPortalApiFp(configuration)
+    return {
+        /**
+         * Get delegate token for customer portal
+         * @summary Get delegate token for customer portal
+         * @param {GetCustomerPortalDelegateTokenRequest} getCustomerPortalDelegateTokenRequest Payload to get delegate token for customer portal
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest: GetCustomerPortalDelegateTokenRequest, options?: any): AxiosPromise<TokenResponse> {
+            return localVarFp.getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CustomerPortalApi - object-oriented interface
+ * @export
+ * @class CustomerPortalApi
+ * @extends {BaseAPI}
+ */
+export class CustomerPortalApi extends BaseAPI {
+    /**
+     * Get delegate token for customer portal
+     * @summary Get delegate token for customer portal
+     * @param {GetCustomerPortalDelegateTokenRequest} getCustomerPortalDelegateTokenRequest Payload to get delegate token for customer portal
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerPortalApi
+     */
+    public getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest: GetCustomerPortalDelegateTokenRequest, options?: AxiosRequestConfig) {
+        return CustomerPortalApiFp(this.configuration).getCustomerPortalDelegateToken(getCustomerPortalDelegateTokenRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * CustomersApi - axios parameter creator
  * @export
  */
@@ -17107,50 +17326,6 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Update payment status in Invoice
-         * @summary Update payment status in Invoice
-         * @param {string} invoiceId 
-         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        invoicePayments: async (invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'invoiceId' is not null or undefined
-            assertParamExists('invoicePayments', 'invoiceId', invoiceId)
-            // verify required parameter 'invoicePaymentsRequest' is not null or undefined
-            assertParamExists('invoicePayments', 'invoicePaymentsRequest', invoicePaymentsRequest)
-            const localVarPath = `/invoices/{invoice_id}/payments`
-                .replace(`{${"invoice_id"}}`, encodeURIComponent(String(invoiceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(invoicePaymentsRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * List invoices
          * @summary List invoices
          * @param {string} [nextToken] Pagination token used as a marker to get records from next page.
@@ -17507,18 +17682,6 @@ export const InvoicesApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Update payment status in Invoice
-         * @summary Update payment status in Invoice
-         * @param {string} invoiceId 
-         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Invoice>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.invoicePayments(invoiceId, invoicePaymentsRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * List invoices
          * @summary List invoices
          * @param {string} [nextToken] Pagination token used as a marker to get records from next page.
@@ -17648,17 +17811,6 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          */
         getInvoice(invoiceId: string, options?: any): AxiosPromise<Invoice> {
             return localVarFp.getInvoice(invoiceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Update payment status in Invoice
-         * @summary Update payment status in Invoice
-         * @param {string} invoiceId 
-         * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: any): AxiosPromise<Invoice> {
-            return localVarFp.invoicePayments(invoiceId, invoicePaymentsRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * List invoices
@@ -17791,19 +17943,6 @@ export class InvoicesApi extends BaseAPI {
      */
     public getInvoice(invoiceId: string, options?: AxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).getInvoice(invoiceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Update payment status in Invoice
-     * @summary Update payment status in Invoice
-     * @param {string} invoiceId 
-     * @param {InvoicePaymentsRequest} invoicePaymentsRequest Payload to update payments of invoice
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof InvoicesApi
-     */
-    public invoicePayments(invoiceId: string, invoicePaymentsRequest: InvoicePaymentsRequest, options?: AxiosRequestConfig) {
-        return InvoicesApiFp(this.configuration).invoicePayments(invoiceId, invoicePaymentsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -19894,10 +20033,11 @@ export const PricingRulesApiAxiosParamCreator = function (configuration?: Config
          * @summary List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
+         * @param {'IN_ADVANCE' | 'IN_ARREARS'} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingRulesByScheduleId: async (pricePlanId: string, pricingScheduleId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPricingRulesByScheduleId: async (pricePlanId: string, pricingScheduleId: string, invoiceTiming?: 'IN_ADVANCE' | 'IN_ARREARS', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pricePlanId' is not null or undefined
             assertParamExists('listPricingRulesByScheduleId', 'pricePlanId', pricePlanId)
             // verify required parameter 'pricingScheduleId' is not null or undefined
@@ -19919,6 +20059,10 @@ export const PricingRulesApiAxiosParamCreator = function (configuration?: Config
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (invoiceTiming !== undefined) {
+                localVarQueryParameter['invoice_timing'] = invoiceTiming;
+            }
 
 
     
@@ -19946,11 +20090,12 @@ export const PricingRulesApiFp = function(configuration?: Configuration) {
          * @summary List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
+         * @param {'IN_ADVANCE' | 'IN_ARREARS'} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricingRulesPaginatedResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, options);
+        async listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, invoiceTiming?: 'IN_ADVANCE' | 'IN_ARREARS', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricingRulesPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, invoiceTiming, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -19968,11 +20113,12 @@ export const PricingRulesApiFactory = function (configuration?: Configuration, b
          * @summary List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
+         * @param {'IN_ADVANCE' | 'IN_ARREARS'} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, options?: any): AxiosPromise<PricingRulesPaginatedResponse> {
-            return localVarFp.listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, options).then((request) => request(axios, basePath));
+        listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, invoiceTiming?: 'IN_ADVANCE' | 'IN_ARREARS', options?: any): AxiosPromise<PricingRulesPaginatedResponse> {
+            return localVarFp.listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, invoiceTiming, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -19989,12 +20135,13 @@ export class PricingRulesApi extends BaseAPI {
      * @summary List pricing rules by price plan id and pricing schedule id
      * @param {string} pricePlanId 
      * @param {string} pricingScheduleId 
+     * @param {'IN_ADVANCE' | 'IN_ARREARS'} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PricingRulesApi
      */
-    public listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, options?: AxiosRequestConfig) {
-        return PricingRulesApiFp(this.configuration).listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, options).then((request) => request(this.axios, this.basePath));
+    public listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, invoiceTiming?: 'IN_ADVANCE' | 'IN_ARREARS', options?: AxiosRequestConfig) {
+        return PricingRulesApiFp(this.configuration).listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, invoiceTiming, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
