@@ -659,6 +659,12 @@ export interface BillingEntitlementRateCard {
      */
     'displayName'?: string;
     /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof BillingEntitlementRateCard
+     */
+    'name'?: string;
+    /**
      * 
      * @type {RatePlan}
      * @memberof BillingEntitlementRateCard
@@ -2508,6 +2514,12 @@ export interface CreditGrantRateCard {
      */
     'displayName'?: string;
     /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof CreditGrantRateCard
+     */
+    'name'?: string;
+    /**
      * A tag string to group creditGrantRateCard
      * @type {string}
      * @memberof CreditGrantRateCard
@@ -3196,6 +3208,12 @@ export interface EntitlementOverageRateCard {
      * @memberof EntitlementOverageRateCard
      */
     'displayName'?: string;
+    /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof EntitlementOverageRateCard
+     */
+    'name'?: string;
     /**
      * A tag string to group rate cards
      * @type {string}
@@ -4545,6 +4563,12 @@ export interface FixedFeeRateCard {
      * @memberof FixedFeeRateCard
      */
     'displayName'?: string;
+    /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof FixedFeeRateCard
+     */
+    'name'?: string;
     /**
      * A tag string to group fixedFeeRateCards
      * @type {string}
@@ -6630,6 +6654,12 @@ export interface LicenseRateCard {
      * @memberof LicenseRateCard
      */
     'displayName'?: string;
+    /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof LicenseRateCard
+     */
+    'name'?: string;
     /**
      * A tag string to group licenseRateCards
      * @type {string}
@@ -10812,6 +10842,12 @@ export interface UsageRateCard {
      * @memberof UsageRateCard
      */
     'displayName'?: string;
+    /**
+     * Unique identifier for the rate card in a price plan. If left null it is auto-generated.
+     * @type {string}
+     * @memberof UsageRateCard
+     */
+    'name'?: string;
     /**
      * A tag string to group usageRateCards
      * @type {string}
