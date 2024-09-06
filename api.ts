@@ -1667,6 +1667,12 @@ export interface CreatePricePlanDetails {
      * @memberof CreatePricePlanDetails
      */
     'deferredRevenue'?: boolean;
+    /**
+     * Allow changes to price plan from the beginning of the ongoing cycle. 
+     * @type {boolean}
+     * @memberof CreatePricePlanDetails
+     */
+    'allow_ongoing_cycle_updates'?: boolean;
 }
 /**
  * 
@@ -7730,6 +7736,12 @@ export interface PricePlanDetails {
      * @memberof PricePlanDetails
      */
     'deferredRevenue'?: boolean;
+    /**
+     * Allow changes to price plan from the beginning of the ongoing cycle. type: boolean 
+     * @type {any}
+     * @memberof PricePlanDetails
+     */
+    'allow_ongoing_cycle_updates'?: any;
 }
 
 
