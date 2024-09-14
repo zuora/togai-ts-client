@@ -503,6 +503,212 @@ export interface Address {
     'country'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface Alert
+ */
+export interface Alert {
+    /**
+     * Alert ID
+     * @type {string}
+     * @memberof Alert
+     */
+    'id': string;
+    /**
+     * Alert Version
+     * @type {number}
+     * @memberof Alert
+     */
+    'version': number;
+    /**
+     * Alert Description
+     * @type {string}
+     * @memberof Alert
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {AlertStatus}
+     * @memberof Alert
+     */
+    'status': AlertStatus;
+    /**
+     * Validity of the alert in minutes, if null then alert will be valid forever
+     * @type {number}
+     * @memberof Alert
+     */
+    'validity'?: number;
+    /**
+     * Alert Template Id
+     * @type {string}
+     * @memberof Alert
+     */
+    'alertTemplateId': string;
+    /**
+     * Interval
+     * @type {number}
+     * @memberof Alert
+     */
+    'interval': number;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof Alert
+     */
+    'entityDetails'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof Alert
+     */
+    'ownerDetails'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof Alert
+     */
+    'parameters'?: { [key: string]: object; };
+    /**
+     * Created At
+     * @type {string}
+     * @memberof Alert
+     */
+    'createdAt': string;
+    /**
+     * Updated At
+     * @type {string}
+     * @memberof Alert
+     */
+    'updatedAt'?: string;
+}
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const AlertStatus = {
+    Active: 'ACTIVE',
+    Inactive: 'INACTIVE'
+} as const;
+
+export type AlertStatus = typeof AlertStatus[keyof typeof AlertStatus];
+
+
+/**
+ * 
+ * @export
+ * @interface AlertTemplate
+ */
+export interface AlertTemplate {
+    /**
+     * Alert Template ID
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'id': string;
+    /**
+     * Alert Template Name
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'name': string;
+    /**
+     * Alert Template Description
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'description'?: string;
+    /**
+     * Cron Interval
+     * @type {number}
+     * @memberof AlertTemplate
+     */
+    'interval': number;
+    /**
+     * Entity Schema
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'entitySchema'?: string;
+    /**
+     * Entity Type
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'entityType'?: string;
+    /**
+     * Owner Schema
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'ownerSchema'?: string;
+    /**
+     * Owner Type
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'ownerType'?: string;
+    /**
+     * Parameters Schema
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'parametersSchema'?: string;
+    /**
+     * Created At
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'createdAt': string;
+    /**
+     * Updated At
+     * @type {string}
+     * @memberof AlertTemplate
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AlertTemplatesPaginatedResponse
+ */
+export interface AlertTemplatesPaginatedResponse {
+    /**
+     * 
+     * @type {Array<AlertTemplate>}
+     * @memberof AlertTemplatesPaginatedResponse
+     */
+    'data': Array<AlertTemplate>;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertTemplatesPaginatedResponse
+     */
+    'nextToken'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AlertsPaginatedResponse
+ */
+export interface AlertsPaginatedResponse {
+    /**
+     * 
+     * @type {Array<Alert>}
+     * @memberof AlertsPaginatedResponse
+     */
+    'data': Array<Alert>;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertsPaginatedResponse
+     */
+    'nextToken'?: string;
+}
+/**
  * Represents an Alias
  * @export
  * @interface Alias
@@ -1051,6 +1257,63 @@ export interface CreateAddOnRequest {
      * @memberof CreateAddOnRequest
      */
     'billableName'?: string;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface CreateAlertRequest
+ */
+export interface CreateAlertRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAlertRequest
+     */
+    'alertTemplateId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAlertRequest
+     */
+    'interval': number;
+    /**
+     * Validity of the alert in minutes, if null then alert will be valid forever
+     * @type {number}
+     * @memberof CreateAlertRequest
+     */
+    'validity'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAlertRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof CreateAlertRequest
+     */
+    'entityDetails'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof CreateAlertRequest
+     */
+    'ownerDetails'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof CreateAlertRequest
+     */
+    'parameters'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {AlertStatus}
+     * @memberof CreateAlertRequest
+     */
+    'status': AlertStatus;
 }
 
 
@@ -5295,6 +5558,92 @@ export interface GrantDetails {
 }
 
 
+/**
+ * 
+ * @export
+ * @interface Incident
+ */
+export interface Incident {
+    /**
+     * Incident ID
+     * @type {string}
+     * @memberof Incident
+     */
+    'id': string;
+    /**
+     * Alert ID
+     * @type {string}
+     * @memberof Incident
+     */
+    'alertId': string;
+    /**
+     * Alert Version
+     * @type {number}
+     * @memberof Incident
+     */
+    'alertVersion': number;
+    /**
+     * Alert Template Id
+     * @type {string}
+     * @memberof Incident
+     */
+    'alertTemplateId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Incident
+     */
+    'validUntil'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof Incident
+     */
+    'reportData'?: { [key: string]: object; };
+    /**
+     * Incident Status
+     * @type {string}
+     * @memberof Incident
+     */
+    'status': string;
+    /**
+     * Last Checked At
+     * @type {string}
+     * @memberof Incident
+     */
+    'lastCheckedAt'?: string;
+    /**
+     * Created At
+     * @type {string}
+     * @memberof Incident
+     */
+    'createdAt': string;
+    /**
+     * Updated At
+     * @type {string}
+     * @memberof Incident
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface IncidentsPaginatedResponse
+ */
+export interface IncidentsPaginatedResponse {
+    /**
+     * 
+     * @type {Array<Incident>}
+     * @memberof IncidentsPaginatedResponse
+     */
+    'data': Array<Incident>;
+    /**
+     * 
+     * @type {string}
+     * @memberof IncidentsPaginatedResponse
+     */
+    'nextToken'?: string;
+}
 /**
  * Payload for ingesting batch events
  * @export
@@ -10024,6 +10373,45 @@ export interface UpdateAddOnRequest {
     'billableName'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface UpdateAlertRequest
+ */
+export interface UpdateAlertRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAlertRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {AlertStatus}
+     * @memberof UpdateAlertRequest
+     */
+    'status'?: AlertStatus;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAlertRequest
+     */
+    'interval'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAlertRequest
+     */
+    'validity'?: number;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof UpdateAlertRequest
+     */
+    'parameters'?: { [key: string]: object; };
+}
+
+
+/**
  * Payload to update customer
  * @export
  * @interface UpdateCustomerRequest
@@ -10135,6 +10523,26 @@ export interface UpdateFeatureRequest {
      */
     'schemaAssociations'?: Array<EventSchemasForFeature>;
 }
+/**
+ * 
+ * @export
+ * @interface UpdateIncidentStatusRequest
+ */
+export interface UpdateIncidentStatusRequest {
+    /**
+     * Incident Status
+     * @type {string}
+     * @memberof UpdateIncidentStatusRequest
+     */
+    'status': UpdateIncidentStatusRequestStatusEnum;
+}
+
+export const UpdateIncidentStatusRequestStatusEnum = {
+    Closed: 'CLOSED'
+} as const;
+
+export type UpdateIncidentStatusRequestStatusEnum = typeof UpdateIncidentStatusRequestStatusEnum[keyof typeof UpdateIncidentStatusRequestStatusEnum];
+
 /**
  * Add accounts to an invoice group
  * @export
@@ -12997,6 +13405,607 @@ export class AddOnsApi extends BaseAPI {
      */
     public updateAddOn(addonId: string, updateAddOnRequest: UpdateAddOnRequest, options?: AxiosRequestConfig) {
         return AddOnsApiFp(this.configuration).updateAddOn(addonId, updateAddOnRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * AlertsApi - axios parameter creator
+ * @export
+ */
+export const AlertsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Create an alert
+         * @summary Create an alert
+         * @param {CreateAlertRequest} createAlertRequest Payload to install an alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAlert: async (createAlertRequest: CreateAlertRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createAlertRequest' is not null or undefined
+            assertParamExists('createAlert', 'createAlertRequest', createAlertRequest)
+            const localVarPath = `/alerts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAlertRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get an alert template
+         * @summary Get an alert template
+         * @param {string} alertTemplateId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAlertTemplate: async (alertTemplateId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'alertTemplateId' is not null or undefined
+            assertParamExists('getAlertTemplate', 'alertTemplateId', alertTemplateId)
+            const localVarPath = `/alert_templates/{alert_template_id}`
+                .replace(`{${"alert_template_id"}}`, encodeURIComponent(String(alertTemplateId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of alert templates with pagination and sort.
+         * @summary List alert templates
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAlertTemplates: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/alert_templates`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get an incident
+         * @summary Get an incident
+         * @param {string} incidentId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncident: async (incidentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'incidentId' is not null or undefined
+            assertParamExists('getIncident', 'incidentId', incidentId)
+            const localVarPath = `/incidents/{incident_id}`
+                .replace(`{${"incident_id"}}`, encodeURIComponent(String(incidentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of incidents with pagination and sort.
+         * @summary List incidents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncidents: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/incidents`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of alerts with pagination and sort.
+         * @summary List alerts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAlerts: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/alerts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update an alert
+         * @summary Update an alert
+         * @param {string} alertId 
+         * @param {UpdateAlertRequest} [updateAlertRequest] Payload to update alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAlert: async (alertId: string, updateAlertRequest?: UpdateAlertRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'alertId' is not null or undefined
+            assertParamExists('updateAlert', 'alertId', alertId)
+            const localVarPath = `/alerts/{alert_id}`
+                .replace(`{${"alert_id"}}`, encodeURIComponent(String(alertId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAlertRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update an incident status
+         * @summary Update an incident status
+         * @param {string} incidentId 
+         * @param {UpdateIncidentStatusRequest} [updateIncidentStatusRequest] Payload to update incident status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateIncidentStatus: async (incidentId: string, updateIncidentStatusRequest?: UpdateIncidentStatusRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'incidentId' is not null or undefined
+            assertParamExists('updateIncidentStatus', 'incidentId', incidentId)
+            const localVarPath = `/incidents/{incident_id}/status`
+                .replace(`{${"incident_id"}}`, encodeURIComponent(String(incidentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateIncidentStatusRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AlertsApi - functional programming interface
+ * @export
+ */
+export const AlertsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AlertsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Create an alert
+         * @summary Create an alert
+         * @param {CreateAlertRequest} createAlertRequest Payload to install an alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAlert(createAlertRequest: CreateAlertRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Alert>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAlert(createAlertRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Get an alert template
+         * @summary Get an alert template
+         * @param {string} alertTemplateId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAlertTemplate(alertTemplateId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlertTemplate>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAlertTemplate(alertTemplateId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of alert templates with pagination and sort.
+         * @summary List alert templates
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAlertTemplates(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlertTemplatesPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAlertTemplates(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Get an incident
+         * @summary Get an incident
+         * @param {string} incidentId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIncident(incidentId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Incident>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIncident(incidentId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of incidents with pagination and sort.
+         * @summary List incidents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIncidents(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IncidentsPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIncidents(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of alerts with pagination and sort.
+         * @summary List alerts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAlerts(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlertsPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAlerts(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Update an alert
+         * @summary Update an alert
+         * @param {string} alertId 
+         * @param {UpdateAlertRequest} [updateAlertRequest] Payload to update alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAlert(alertId: string, updateAlertRequest?: UpdateAlertRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Alert>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAlert(alertId, updateAlertRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Update an incident status
+         * @summary Update an incident status
+         * @param {string} incidentId 
+         * @param {UpdateIncidentStatusRequest} [updateIncidentStatusRequest] Payload to update incident status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateIncidentStatus(incidentId: string, updateIncidentStatusRequest?: UpdateIncidentStatusRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Incident>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateIncidentStatus(incidentId, updateIncidentStatusRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AlertsApi - factory interface
+ * @export
+ */
+export const AlertsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AlertsApiFp(configuration)
+    return {
+        /**
+         * Create an alert
+         * @summary Create an alert
+         * @param {CreateAlertRequest} createAlertRequest Payload to install an alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAlert(createAlertRequest: CreateAlertRequest, options?: any): AxiosPromise<Alert> {
+            return localVarFp.createAlert(createAlertRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get an alert template
+         * @summary Get an alert template
+         * @param {string} alertTemplateId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAlertTemplate(alertTemplateId: string, options?: any): AxiosPromise<AlertTemplate> {
+            return localVarFp.getAlertTemplate(alertTemplateId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of alert templates with pagination and sort.
+         * @summary List alert templates
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAlertTemplates(options?: any): AxiosPromise<AlertTemplatesPaginatedResponse> {
+            return localVarFp.getAlertTemplates(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get an incident
+         * @summary Get an incident
+         * @param {string} incidentId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncident(incidentId: string, options?: any): AxiosPromise<Incident> {
+            return localVarFp.getIncident(incidentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of incidents with pagination and sort.
+         * @summary List incidents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncidents(options?: any): AxiosPromise<IncidentsPaginatedResponse> {
+            return localVarFp.getIncidents(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of alerts with pagination and sort.
+         * @summary List alerts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAlerts(options?: any): AxiosPromise<AlertsPaginatedResponse> {
+            return localVarFp.listAlerts(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update an alert
+         * @summary Update an alert
+         * @param {string} alertId 
+         * @param {UpdateAlertRequest} [updateAlertRequest] Payload to update alert
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAlert(alertId: string, updateAlertRequest?: UpdateAlertRequest, options?: any): AxiosPromise<Alert> {
+            return localVarFp.updateAlert(alertId, updateAlertRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update an incident status
+         * @summary Update an incident status
+         * @param {string} incidentId 
+         * @param {UpdateIncidentStatusRequest} [updateIncidentStatusRequest] Payload to update incident status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateIncidentStatus(incidentId: string, updateIncidentStatusRequest?: UpdateIncidentStatusRequest, options?: any): AxiosPromise<Incident> {
+            return localVarFp.updateIncidentStatus(incidentId, updateIncidentStatusRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AlertsApi - object-oriented interface
+ * @export
+ * @class AlertsApi
+ * @extends {BaseAPI}
+ */
+export class AlertsApi extends BaseAPI {
+    /**
+     * Create an alert
+     * @summary Create an alert
+     * @param {CreateAlertRequest} createAlertRequest Payload to install an alert
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public createAlert(createAlertRequest: CreateAlertRequest, options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).createAlert(createAlertRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get an alert template
+     * @summary Get an alert template
+     * @param {string} alertTemplateId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public getAlertTemplate(alertTemplateId: string, options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).getAlertTemplate(alertTemplateId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of alert templates with pagination and sort.
+     * @summary List alert templates
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public getAlertTemplates(options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).getAlertTemplates(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get an incident
+     * @summary Get an incident
+     * @param {string} incidentId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public getIncident(incidentId: string, options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).getIncident(incidentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of incidents with pagination and sort.
+     * @summary List incidents
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public getIncidents(options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).getIncidents(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of alerts with pagination and sort.
+     * @summary List alerts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public listAlerts(options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).listAlerts(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update an alert
+     * @summary Update an alert
+     * @param {string} alertId 
+     * @param {UpdateAlertRequest} [updateAlertRequest] Payload to update alert
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public updateAlert(alertId: string, updateAlertRequest?: UpdateAlertRequest, options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).updateAlert(alertId, updateAlertRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update an incident status
+     * @summary Update an incident status
+     * @param {string} incidentId 
+     * @param {UpdateIncidentStatusRequest} [updateIncidentStatusRequest] Payload to update incident status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public updateIncidentStatus(incidentId: string, updateIncidentStatusRequest?: UpdateIncidentStatusRequest, options?: AxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).updateIncidentStatus(incidentId, updateIncidentStatusRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
