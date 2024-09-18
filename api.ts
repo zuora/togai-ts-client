@@ -3145,6 +3145,12 @@ export interface CustomInvoiceLineItem {
      * @memberof CustomInvoiceLineItem
      */
     'value'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomInvoiceLineItem
+     */
+    'billableId'?: string;
 }
 /**
  * Structure of customer
@@ -3792,6 +3798,18 @@ export interface EventPipelineInfo {
      * @memberof EventPipelineInfo
      */
     'statusBeforeReverting'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventPipelineInfo
+     */
+    'baseCurrency'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventPipelineInfo
+     */
+    'invoiceCurrency'?: string;
 }
 /**
  * 
