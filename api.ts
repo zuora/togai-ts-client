@@ -9750,6 +9750,149 @@ export type PurchaseType = typeof PurchaseType[keyof typeof PurchaseType];
 
 
 /**
+ * 
+ * @export
+ * @interface QueryColumn
+ */
+export interface QueryColumn {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryColumn
+     */
+    'dataSource'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryColumn
+     */
+    'columnName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryColumn
+     */
+    'alias'?: string;
+    /**
+     * 
+     * @type {Array<QueryFunction>}
+     * @memberof QueryColumn
+     */
+    'functions'?: Array<QueryFunction>;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryColumn
+     */
+    'aggregator'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface QueryFilter
+ */
+export interface QueryFilter {
+    /**
+     * 
+     * @type {QueryColumn}
+     * @memberof QueryFilter
+     */
+    'column': QueryColumn;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryFilter
+     */
+    'operator': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof QueryFilter
+     */
+    'args': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface QueryFunction
+ */
+export interface QueryFunction {
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryFunction
+     */
+    'name': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof QueryFunction
+     */
+    'args': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface QueryInput
+ */
+export interface QueryInput {
+    /**
+     * 
+     * @type {Array<QueryColumn>}
+     * @memberof QueryInput
+     */
+    'selects': Array<QueryColumn>;
+    /**
+     * 
+     * @type {Array<QueryFilter>}
+     * @memberof QueryInput
+     */
+    'queryFilters'?: Array<QueryFilter>;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryInput
+     */
+    'baseDataSource': string;
+    /**
+     * 
+     * @type {Array<QueryInputSortInner>}
+     * @memberof QueryInput
+     */
+    'sort': Array<QueryInputSortInner>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof QueryInput
+     */
+    'seekValues'?: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof QueryInput
+     */
+    'limit': number;
+}
+/**
+ * 
+ * @export
+ * @interface QueryInputSortInner
+ */
+export interface QueryInputSortInner {
+    /**
+     * 
+     * @type {QueryColumn}
+     * @memberof QueryInputSortInner
+     */
+    'column': QueryColumn;
+    /**
+     * 
+     * @type {string}
+     * @memberof QueryInputSortInner
+     */
+    'sortOrder': string;
+}
+/**
  * Contains all rate related configurations
  * @export
  * @interface RatePlan
@@ -9851,6 +9994,132 @@ export interface RemoveAccountAliasesRequest {
      * @memberof RemoveAccountAliasesRequest
      */
     'accountAliases'?: Array<RemoveAccountAliasRequest>;
+}
+/**
+ * Represents a Report
+ * @export
+ * @interface Report
+ */
+export interface Report {
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'account_id'?: string;
+    /**
+     * 
+     * @type {ReportStatus}
+     * @memberof Report
+     */
+    'status': ReportStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'fileId'?: string;
+    /**
+     * 
+     * @type {QueryInput}
+     * @memberof Report
+     */
+    'queryInput'?: QueryInput;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'reportTemplateId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Report
+     */
+    'preSignedUrl'?: string;
+    /**
+     * 
+     * @type {ReportType}
+     * @memberof Report
+     */
+    'type'?: ReportType;
+}
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const ReportStatus = {
+    Queued: 'QUEUED',
+    Running: 'RUNNING',
+    Failed: 'FAILED',
+    UploadPending: 'UPLOAD_PENDING',
+    Completed: 'COMPLETED'
+} as const;
+
+export type ReportStatus = typeof ReportStatus[keyof typeof ReportStatus];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const ReportType = {
+    Template: 'TEMPLATE',
+    Query: 'QUERY',
+    Custom: 'CUSTOM'
+} as const;
+
+export type ReportType = typeof ReportType[keyof typeof ReportType];
+
+
+/**
+ * Represents a list response for reports
+ * @export
+ * @interface ReportsPaginatedResponse
+ */
+export interface ReportsPaginatedResponse {
+    /**
+     * 
+     * @type {Array<Report>}
+     * @memberof ReportsPaginatedResponse
+     */
+    'data'?: Array<Report>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReportsPaginatedResponse
+     */
+    'nextToken'?: string;
 }
 /**
  * 
@@ -21217,6 +21486,124 @@ export class PricingRulesApi extends BaseAPI {
      */
     public listPricingRulesByScheduleId(pricePlanId: string, pricingScheduleId: string, invoiceTiming?: 'IN_ADVANCE' | 'IN_ARREARS', options?: AxiosRequestConfig) {
         return PricingRulesApiFp(this.configuration).listPricingRulesByScheduleId(pricePlanId, pricingScheduleId, invoiceTiming, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ReportsApi - axios parameter creator
+ * @export
+ */
+export const ReportsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * List reports
+         * @summary List reports
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listReports: async (nextToken?: string, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/reports`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ReportsApi - functional programming interface
+ * @export
+ */
+export const ReportsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ReportsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * List reports
+         * @summary List reports
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listReports(nextToken?: string, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportsPaginatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listReports(nextToken, pageSize, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ReportsApi - factory interface
+ * @export
+ */
+export const ReportsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ReportsApiFp(configuration)
+    return {
+        /**
+         * List reports
+         * @summary List reports
+         * @param {string} [nextToken] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listReports(nextToken?: string, pageSize?: number, options?: any): AxiosPromise<ReportsPaginatedResponse> {
+            return localVarFp.listReports(nextToken, pageSize, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ReportsApi - object-oriented interface
+ * @export
+ * @class ReportsApi
+ * @extends {BaseAPI}
+ */
+export class ReportsApi extends BaseAPI {
+    /**
+     * List reports
+     * @summary List reports
+     * @param {string} [nextToken] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public listReports(nextToken?: string, pageSize?: number, options?: AxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).listReports(nextToken, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
