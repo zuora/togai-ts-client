@@ -17934,10 +17934,11 @@ export const FileStorageApiAxiosParamCreator = function (configuration?: Configu
          * Get a download url for a file
          * @summary Get a download url for a file
          * @param {string} fileId 
+         * @param {number} [expiry] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDownloadUrl: async (fileId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDownloadUrl: async (fileId: string, expiry?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getDownloadUrl', 'fileId', fileId)
             const localVarPath = `/files/{file_id}/download_url`
@@ -17956,6 +17957,10 @@ export const FileStorageApiAxiosParamCreator = function (configuration?: Configu
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (expiry !== undefined) {
+                localVarQueryParameter['expiry'] = expiry;
+            }
 
 
     
@@ -18020,11 +18025,12 @@ export const FileStorageApiFp = function(configuration?: Configuration) {
          * Get a download url for a file
          * @summary Get a download url for a file
          * @param {string} fileId 
+         * @param {number} [expiry] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDownloadUrl(fileId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileDownloadUrlResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDownloadUrl(fileId, options);
+        async getDownloadUrl(fileId: string, expiry?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileDownloadUrlResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDownloadUrl(fileId, expiry, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -18052,11 +18058,12 @@ export const FileStorageApiFactory = function (configuration?: Configuration, ba
          * Get a download url for a file
          * @summary Get a download url for a file
          * @param {string} fileId 
+         * @param {number} [expiry] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDownloadUrl(fileId: string, options?: any): AxiosPromise<FileDownloadUrlResponse> {
-            return localVarFp.getDownloadUrl(fileId, options).then((request) => request(axios, basePath));
+        getDownloadUrl(fileId: string, expiry?: number, options?: any): AxiosPromise<FileDownloadUrlResponse> {
+            return localVarFp.getDownloadUrl(fileId, expiry, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a file
@@ -18082,12 +18089,13 @@ export class FileStorageApi extends BaseAPI {
      * Get a download url for a file
      * @summary Get a download url for a file
      * @param {string} fileId 
+     * @param {number} [expiry] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FileStorageApi
      */
-    public getDownloadUrl(fileId: string, options?: AxiosRequestConfig) {
-        return FileStorageApiFp(this.configuration).getDownloadUrl(fileId, options).then((request) => request(this.axios, this.basePath));
+    public getDownloadUrl(fileId: string, expiry?: number, options?: AxiosRequestConfig) {
+        return FileStorageApiFp(this.configuration).getDownloadUrl(fileId, expiry, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
