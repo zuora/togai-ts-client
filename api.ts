@@ -3126,7 +3126,7 @@ export interface CustomInvoiceLineItem {
      * @type {string}
      * @memberof CustomInvoiceLineItem
      */
-    'description': string;
+    'description'?: string;
     /**
      * 
      * @type {number}
