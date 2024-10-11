@@ -11422,6 +11422,12 @@ export interface UsageMeter {
     'computations'?: Array<Computation>;
     /**
      * 
+     * @type {EventSchema}
+     * @memberof UsageMeter
+     */
+    'eventSchema'?: EventSchema;
+    /**
+     * 
      * @type {string}
      * @memberof UsageMeter
      */
@@ -22154,10 +22160,11 @@ export const UsageMetersApiAxiosParamCreator = function (configuration?: Configu
          * Get an usage meter using event schema name and usage meter id.
          * @summary Get usage meter
          * @param {string} usageMeterId 
+         * @param {boolean} [includeSchema] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsageMeter: async (usageMeterId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsageMeter: async (usageMeterId: string, includeSchema?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'usageMeterId' is not null or undefined
             assertParamExists('getUsageMeter', 'usageMeterId', usageMeterId)
             const localVarPath = `/usage_meters/{usage_meter_id}`
@@ -22176,6 +22183,10 @@ export const UsageMetersApiAxiosParamCreator = function (configuration?: Configu
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (includeSchema !== undefined) {
+                localVarQueryParameter['includeSchema'] = includeSchema;
+            }
 
 
     
@@ -22344,11 +22355,12 @@ export const UsageMetersApiFp = function(configuration?: Configuration) {
          * Get an usage meter using event schema name and usage meter id.
          * @summary Get usage meter
          * @param {string} usageMeterId 
+         * @param {boolean} [includeSchema] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsageMeter(usageMeterId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsageMeter>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsageMeter(usageMeterId, options);
+        async getUsageMeter(usageMeterId: string, includeSchema?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsageMeter>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsageMeter(usageMeterId, includeSchema, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -22431,11 +22443,12 @@ export const UsageMetersApiFactory = function (configuration?: Configuration, ba
          * Get an usage meter using event schema name and usage meter id.
          * @summary Get usage meter
          * @param {string} usageMeterId 
+         * @param {boolean} [includeSchema] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsageMeter(usageMeterId: string, options?: any): AxiosPromise<UsageMeter> {
-            return localVarFp.getUsageMeter(usageMeterId, options).then((request) => request(axios, basePath));
+        getUsageMeter(usageMeterId: string, includeSchema?: boolean, options?: any): AxiosPromise<UsageMeter> {
+            return localVarFp.getUsageMeter(usageMeterId, includeSchema, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a list of usage meters associated with an event schema
@@ -22523,12 +22536,13 @@ export class UsageMetersApi extends BaseAPI {
      * Get an usage meter using event schema name and usage meter id.
      * @summary Get usage meter
      * @param {string} usageMeterId 
+     * @param {boolean} [includeSchema] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsageMetersApi
      */
-    public getUsageMeter(usageMeterId: string, options?: AxiosRequestConfig) {
-        return UsageMetersApiFp(this.configuration).getUsageMeter(usageMeterId, options).then((request) => request(this.axios, this.basePath));
+    public getUsageMeter(usageMeterId: string, includeSchema?: boolean, options?: AxiosRequestConfig) {
+        return UsageMetersApiFp(this.configuration).getUsageMeter(usageMeterId, includeSchema, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
