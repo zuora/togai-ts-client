@@ -2052,7 +2052,8 @@ export const CreatePricePlanMigrationRequestMigrationModeEnum = {
     Immediate: 'IMMEDIATE',
     ImmediateIgnoreOverride: 'IMMEDIATE_IGNORE_OVERRIDE',
     NextCycle: 'NEXT_CYCLE',
-    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE'
+    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE',
+    StartOfCurrentCycle: 'START_OF_CURRENT_CYCLE'
 } as const;
 
 export type CreatePricePlanMigrationRequestMigrationModeEnum = typeof CreatePricePlanMigrationRequestMigrationModeEnum[keyof typeof CreatePricePlanMigrationRequestMigrationModeEnum];
@@ -4814,6 +4815,27 @@ export interface FileDownloadUrlResponse {
     'downloadUrl': string;
 }
 /**
+ * Request to finalize a price plan version
+ * @export
+ * @interface FinalizePricePlanRequest
+ */
+export interface FinalizePricePlanRequest {
+    /**
+     * 
+     * @type {MigrationMode}
+     * @memberof FinalizePricePlanRequest
+     */
+    'migrationMode'?: MigrationMode;
+    /**
+     * 
+     * @type {VersionsToMigrate}
+     * @memberof FinalizePricePlanRequest
+     */
+    'versionsToMigrate'?: VersionsToMigrate;
+}
+
+
+/**
  * 
  * @export
  * @interface FixedFeeRate
@@ -7503,6 +7525,24 @@ export interface MetricQueryResponse {
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const MigrationMode = {
+    Immediate: 'IMMEDIATE',
+    ImmediateIgnoreOverride: 'IMMEDIATE_IGNORE_OVERRIDE',
+    NextCycle: 'NEXT_CYCLE',
+    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE',
+    None: 'NONE',
+    StartOfCurrentCycle: 'START_OF_CURRENT_CYCLE'
+} as const;
+
+export type MigrationMode = typeof MigrationMode[keyof typeof MigrationMode];
+
+
+/**
+ * 
+ * @export
  * @interface MinimumCommitment
  */
 export interface MinimumCommitment {
@@ -8387,7 +8427,8 @@ export const PricePlanMigrationConfigMigrationModeEnum = {
     Immediate: 'IMMEDIATE',
     ImmediateIgnoreOverride: 'IMMEDIATE_IGNORE_OVERRIDE',
     NextCycle: 'NEXT_CYCLE',
-    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE'
+    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE',
+    StartOfCurrentCycle: 'START_OF_CURRENT_CYCLE'
 } as const;
 
 export type PricePlanMigrationConfigMigrationModeEnum = typeof PricePlanMigrationConfigMigrationModeEnum[keyof typeof PricePlanMigrationConfigMigrationModeEnum];
@@ -10892,11 +10933,23 @@ export const UpdateInvoiceRequestStatusEnum = {
 export type UpdateInvoiceRequestStatusEnum = typeof UpdateInvoiceRequestStatusEnum[keyof typeof UpdateInvoiceRequestStatusEnum];
 
 /**
- * Request to update a price plan
+ * 
  * @export
  * @interface UpdatePricePlanRequest
  */
 export interface UpdatePricePlanRequest {
+    /**
+     * 
+     * @type {MigrationMode}
+     * @memberof UpdatePricePlanRequest
+     */
+    'migrationMode'?: MigrationMode;
+    /**
+     * 
+     * @type {VersionsToMigrate}
+     * @memberof UpdatePricePlanRequest
+     */
+    'versionsToMigrate'?: VersionsToMigrate;
     /**
      * Description of price plan
      * @type {string}
@@ -10911,40 +10964,38 @@ export interface UpdatePricePlanRequest {
     'pricePlanDetails'?: CreatePricePlanDetailsOverride;
     /**
      * 
-     * @type {string}
-     * @memberof UpdatePricePlanRequest
-     */
-    'migrationMode'?: UpdatePricePlanRequestMigrationModeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePricePlanRequest
-     */
-    'versionsToMigrate'?: UpdatePricePlanRequestVersionsToMigrateEnum;
-    /**
-     * 
      * @type {Array<CreatePricingRule>}
      * @memberof UpdatePricePlanRequest
      */
     'pricingRules'?: Array<CreatePricingRule>;
 }
 
-export const UpdatePricePlanRequestMigrationModeEnum = {
-    Immediate: 'IMMEDIATE',
-    ImmediateIgnoreOverride: 'IMMEDIATE_IGNORE_OVERRIDE',
-    NextCycle: 'NEXT_CYCLE',
-    NextCycleIgnoreOverride: 'NEXT_CYCLE_IGNORE_OVERRIDE',
-    None: 'NONE'
-} as const;
 
-export type UpdatePricePlanRequestMigrationModeEnum = typeof UpdatePricePlanRequestMigrationModeEnum[keyof typeof UpdatePricePlanRequestMigrationModeEnum];
-export const UpdatePricePlanRequestVersionsToMigrateEnum = {
-    LatestVersion: 'LATEST_VERSION',
-    AllVersion: 'ALL_VERSION'
-} as const;
-
-export type UpdatePricePlanRequestVersionsToMigrateEnum = typeof UpdatePricePlanRequestVersionsToMigrateEnum[keyof typeof UpdatePricePlanRequestVersionsToMigrateEnum];
-
+/**
+ * Request to update a price plan
+ * @export
+ * @interface UpdatePricePlanRequestAllOf
+ */
+export interface UpdatePricePlanRequestAllOf {
+    /**
+     * Description of price plan
+     * @type {string}
+     * @memberof UpdatePricePlanRequestAllOf
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {CreatePricePlanDetailsOverride}
+     * @memberof UpdatePricePlanRequestAllOf
+     */
+    'pricePlanDetails'?: CreatePricePlanDetailsOverride;
+    /**
+     * 
+     * @type {Array<CreatePricingRule>}
+     * @memberof UpdatePricePlanRequestAllOf
+     */
+    'pricingRules'?: Array<CreatePricingRule>;
+}
 /**
  * 
  * @export
@@ -11599,6 +11650,20 @@ export interface ValidateEntitlementValueRequest {
      */
     'value': string;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const VersionsToMigrate = {
+    LatestVersion: 'LATEST_VERSION',
+    AllVersion: 'ALL_VERSION'
+} as const;
+
+export type VersionsToMigrate = typeof VersionsToMigrate[keyof typeof VersionsToMigrate];
+
+
 /**
  * Wallet Balance response
  * @export
