@@ -90,12 +90,6 @@ export interface Account {
      */
     'primaryEmail'?: string;
     /**
-     * 
-     * @type {AccountsBillingInformation}
-     * @memberof Account
-     */
-    'billingInformation'?: AccountsBillingInformation;
-    /**
      * Status of the account
      * @type {string}
      * @memberof Account
@@ -234,25 +228,6 @@ export interface AccountPaginatedResponse {
      * @memberof AccountPaginatedResponse
      */
     'context'?: PaginationOptions;
-}
-/**
- * Billing information of an account
- * @export
- * @interface AccountsBillingInformation
- */
-export interface AccountsBillingInformation {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AccountsBillingInformation
-     */
-    'emailRecipients'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AccountsBillingInformation
-     */
-    'additionalEmailRecipients'?: Array<string>;
 }
 /**
  * Request to activate currencies of a price plan
@@ -1115,12 +1090,6 @@ export interface CreateAccountRequest {
     'primaryEmail'?: string;
     /**
      * 
-     * @type {AccountsBillingInformation}
-     * @memberof CreateAccountRequest
-     */
-    'billingInformation'?: AccountsBillingInformation;
-    /**
-     * 
      * @type {Array<CreateEntitySetting>}
      * @memberof CreateAccountRequest
      */
@@ -1225,12 +1194,6 @@ export interface CreateAccountRequestWithoutCustomerId {
      * @memberof CreateAccountRequestWithoutCustomerId
      */
     'primaryEmail'?: string;
-    /**
-     * 
-     * @type {AccountsBillingInformation}
-     * @memberof CreateAccountRequestWithoutCustomerId
-     */
-    'billingInformation'?: AccountsBillingInformation;
     /**
      * 
      * @type {Array<CreateEntitySetting>}
@@ -10691,12 +10654,6 @@ export interface UpdateAccountRequest {
      * @memberof UpdateAccountRequest
      */
     'primaryEmail'?: string;
-    /**
-     * 
-     * @type {AccountsBillingInformation}
-     * @memberof UpdateAccountRequest
-     */
-    'billingInformation'?: AccountsBillingInformation;
     /**
      * 
      * @type {Address}
