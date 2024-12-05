@@ -12240,7 +12240,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * This API let’s you to create a proposal of a billing/entitlement plan for an account
-         * @summary Propose a purchase of a plan
+         * @summary (DEPRECATED) Propose a purchase of a plan
          * @param {string} accountId account_id corresponding to an account
          * @param {CreateProposalRequest} createProposalRequest Payload to initiate a proposal
          * @param {*} [options] Override http request option.
@@ -12416,7 +12416,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Returns a list of pricing schedules of an account with pagination and sort.
-         * @summary List pricing schedules of an account
+         * @summary (DEPRECATED) List pricing schedules of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
@@ -12484,7 +12484,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Get proposal information
-         * @summary Get proposal information
+         * @summary (DEPRECATED) Get proposal information
          * @param {string} purchaseProposalId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12522,7 +12522,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Get purchase information of an account for a specific plan using account_id and price_plan_id
-         * @summary Get a specific purchase of an account
+         * @summary (DEPRECATED) Get a specific purchase of an account
          * @param {string} purchaseId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12560,7 +12560,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * This API let’s you to initiate a purchase for an account
-         * @summary Initiate a purchase
+         * @summary (DEPRECATED) Initiate a purchase
          * @param {string} accountId account_id corresponding to an account
          * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
          * @param {*} [options] Override http request option.
@@ -12642,7 +12642,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * List all proposals of an account
-         * @summary List all proposals of an account
+         * @summary (DEPRECATED) List all proposals of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12680,7 +12680,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * Get Purchase information for an account using account_id and price_plan_id
-         * @summary Get all purchases for an account
+         * @summary (DEPRECATED) Get all purchases for an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12806,7 +12806,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * This API let’s you to detach or attach a price plan with an existing account
-         * @summary Dissociate or associate a price plan with an account
+         * @summary (DEPRECATED) Dissociate or associate a price plan with an account
          * @param {string} accountId account_id corresponding to an account
          * @param {UpdatePricingScheduleRequestWithActions} updatePricingScheduleRequestWithActions Payload to associate or dissociate a price plan to an account with actions
          * @param {*} [options] Override http request option.
@@ -12850,7 +12850,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * This API let’s you to detach/attach one or more price plans from/to an existing account
-         * @summary Edit schedules of an account.
+         * @summary (DEPRECATED) Edit schedules of an account.
          * @param {string} accountId account_id corresponding to an account
          * @param {EditPricingScheduleRequest} editPricingScheduleRequest Payload to dis/associate one or more price plans to an account
          * @param {boolean} [dryRun] 
@@ -12899,7 +12899,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * This API let’s you to approve or decline a proposal of a billing plan for an account
-         * @summary Approve or decline a purchase of a billing plan
+         * @summary (DEPRECATED) Approve or decline a purchase of a billing plan
          * @param {string} purchaseProposalId 
          * @param {UpdateProposalStatus} updateProposalStatus Payload to approve or decline a proposal
          * @param {*} [options] Override http request option.
@@ -12980,7 +12980,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let’s you to create a proposal of a billing/entitlement plan for an account
-         * @summary Propose a purchase of a plan
+         * @summary (DEPRECATED) Propose a purchase of a plan
          * @param {string} accountId account_id corresponding to an account
          * @param {CreateProposalRequest} createProposalRequest Payload to initiate a proposal
          * @param {*} [options] Override http request option.
@@ -13036,7 +13036,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns a list of pricing schedules of an account with pagination and sort.
-         * @summary List pricing schedules of an account
+         * @summary (DEPRECATED) List pricing schedules of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
@@ -13055,7 +13055,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get proposal information
-         * @summary Get proposal information
+         * @summary (DEPRECATED) Get proposal information
          * @param {string} purchaseProposalId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13068,7 +13068,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get purchase information of an account for a specific plan using account_id and price_plan_id
-         * @summary Get a specific purchase of an account
+         * @summary (DEPRECATED) Get a specific purchase of an account
          * @param {string} purchaseId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13081,7 +13081,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let’s you to initiate a purchase for an account
-         * @summary Initiate a purchase
+         * @summary (DEPRECATED) Initiate a purchase
          * @param {string} accountId account_id corresponding to an account
          * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
          * @param {*} [options] Override http request option.
@@ -13108,7 +13108,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * List all proposals of an account
-         * @summary List all proposals of an account
+         * @summary (DEPRECATED) List all proposals of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13121,7 +13121,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get Purchase information for an account using account_id and price_plan_id
-         * @summary Get all purchases for an account
+         * @summary (DEPRECATED) Get all purchases for an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13162,7 +13162,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let’s you to detach or attach a price plan with an existing account
-         * @summary Dissociate or associate a price plan with an account
+         * @summary (DEPRECATED) Dissociate or associate a price plan with an account
          * @param {string} accountId account_id corresponding to an account
          * @param {UpdatePricingScheduleRequestWithActions} updatePricingScheduleRequestWithActions Payload to associate or dissociate a price plan to an account with actions
          * @param {*} [options] Override http request option.
@@ -13176,7 +13176,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let’s you to detach/attach one or more price plans from/to an existing account
-         * @summary Edit schedules of an account.
+         * @summary (DEPRECATED) Edit schedules of an account.
          * @param {string} accountId account_id corresponding to an account
          * @param {EditPricingScheduleRequest} editPricingScheduleRequest Payload to dis/associate one or more price plans to an account
          * @param {boolean} [dryRun] 
@@ -13191,7 +13191,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let’s you to approve or decline a proposal of a billing plan for an account
-         * @summary Approve or decline a purchase of a billing plan
+         * @summary (DEPRECATED) Approve or decline a purchase of a billing plan
          * @param {string} purchaseProposalId 
          * @param {UpdateProposalStatus} updateProposalStatus Payload to approve or decline a proposal
          * @param {*} [options] Override http request option.
@@ -13236,7 +13236,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * This API let’s you to create a proposal of a billing/entitlement plan for an account
-         * @summary Propose a purchase of a plan
+         * @summary (DEPRECATED) Propose a purchase of a plan
          * @param {string} accountId account_id corresponding to an account
          * @param {CreateProposalRequest} createProposalRequest Payload to initiate a proposal
          * @param {*} [options] Override http request option.
@@ -13280,7 +13280,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Returns a list of pricing schedules of an account with pagination and sort.
-         * @summary List pricing schedules of an account
+         * @summary (DEPRECATED) List pricing schedules of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
@@ -13296,7 +13296,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Get proposal information
-         * @summary Get proposal information
+         * @summary (DEPRECATED) Get proposal information
          * @param {string} purchaseProposalId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13306,7 +13306,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Get purchase information of an account for a specific plan using account_id and price_plan_id
-         * @summary Get a specific purchase of an account
+         * @summary (DEPRECATED) Get a specific purchase of an account
          * @param {string} purchaseId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13316,7 +13316,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * This API let’s you to initiate a purchase for an account
-         * @summary Initiate a purchase
+         * @summary (DEPRECATED) Initiate a purchase
          * @param {string} accountId account_id corresponding to an account
          * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
          * @param {*} [options] Override http request option.
@@ -13337,7 +13337,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * List all proposals of an account
-         * @summary List all proposals of an account
+         * @summary (DEPRECATED) List all proposals of an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13347,7 +13347,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * Get Purchase information for an account using account_id and price_plan_id
-         * @summary Get all purchases for an account
+         * @summary (DEPRECATED) Get all purchases for an account
          * @param {string} accountId account_id corresponding to an account
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13379,7 +13379,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * This API let’s you to detach or attach a price plan with an existing account
-         * @summary Dissociate or associate a price plan with an account
+         * @summary (DEPRECATED) Dissociate or associate a price plan with an account
          * @param {string} accountId account_id corresponding to an account
          * @param {UpdatePricingScheduleRequestWithActions} updatePricingScheduleRequestWithActions Payload to associate or dissociate a price plan to an account with actions
          * @param {*} [options] Override http request option.
@@ -13390,7 +13390,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * This API let’s you to detach/attach one or more price plans from/to an existing account
-         * @summary Edit schedules of an account.
+         * @summary (DEPRECATED) Edit schedules of an account.
          * @param {string} accountId account_id corresponding to an account
          * @param {EditPricingScheduleRequest} editPricingScheduleRequest Payload to dis/associate one or more price plans to an account
          * @param {boolean} [dryRun] 
@@ -13402,7 +13402,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * This API let’s you to approve or decline a proposal of a billing plan for an account
-         * @summary Approve or decline a purchase of a billing plan
+         * @summary (DEPRECATED) Approve or decline a purchase of a billing plan
          * @param {string} purchaseProposalId 
          * @param {UpdateProposalStatus} updateProposalStatus Payload to approve or decline a proposal
          * @param {*} [options] Override http request option.
@@ -13448,7 +13448,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * This API let’s you to create a proposal of a billing/entitlement plan for an account
-     * @summary Propose a purchase of a plan
+     * @summary (DEPRECATED) Propose a purchase of a plan
      * @param {string} accountId account_id corresponding to an account
      * @param {CreateProposalRequest} createProposalRequest Payload to initiate a proposal
      * @param {*} [options] Override http request option.
@@ -13500,7 +13500,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * Returns a list of pricing schedules of an account with pagination and sort.
-     * @summary List pricing schedules of an account
+     * @summary (DEPRECATED) List pricing schedules of an account
      * @param {string} accountId account_id corresponding to an account
      * @param {string} [nextToken] 
      * @param {number} [pageSize] 
@@ -13518,7 +13518,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * Get proposal information
-     * @summary Get proposal information
+     * @summary (DEPRECATED) Get proposal information
      * @param {string} purchaseProposalId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13530,7 +13530,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * Get purchase information of an account for a specific plan using account_id and price_plan_id
-     * @summary Get a specific purchase of an account
+     * @summary (DEPRECATED) Get a specific purchase of an account
      * @param {string} purchaseId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13542,7 +13542,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * This API let’s you to initiate a purchase for an account
-     * @summary Initiate a purchase
+     * @summary (DEPRECATED) Initiate a purchase
      * @param {string} accountId account_id corresponding to an account
      * @param {CreatePurchaseRequest} createPurchaseRequest Payload to initiate a purchase
      * @param {*} [options] Override http request option.
@@ -13567,7 +13567,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * List all proposals of an account
-     * @summary List all proposals of an account
+     * @summary (DEPRECATED) List all proposals of an account
      * @param {string} accountId account_id corresponding to an account
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13579,7 +13579,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * Get Purchase information for an account using account_id and price_plan_id
-     * @summary Get all purchases for an account
+     * @summary (DEPRECATED) Get all purchases for an account
      * @param {string} accountId account_id corresponding to an account
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13617,7 +13617,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * This API let’s you to detach or attach a price plan with an existing account
-     * @summary Dissociate or associate a price plan with an account
+     * @summary (DEPRECATED) Dissociate or associate a price plan with an account
      * @param {string} accountId account_id corresponding to an account
      * @param {UpdatePricingScheduleRequestWithActions} updatePricingScheduleRequestWithActions Payload to associate or dissociate a price plan to an account with actions
      * @param {*} [options] Override http request option.
@@ -13630,7 +13630,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * This API let’s you to detach/attach one or more price plans from/to an existing account
-     * @summary Edit schedules of an account.
+     * @summary (DEPRECATED) Edit schedules of an account.
      * @param {string} accountId account_id corresponding to an account
      * @param {EditPricingScheduleRequest} editPricingScheduleRequest Payload to dis/associate one or more price plans to an account
      * @param {boolean} [dryRun] 
@@ -13644,7 +13644,7 @@ export class AccountsApi extends BaseAPI {
 
     /**
      * This API let’s you to approve or decline a proposal of a billing plan for an account
-     * @summary Approve or decline a purchase of a billing plan
+     * @summary (DEPRECATED) Approve or decline a purchase of a billing plan
      * @param {string} purchaseProposalId 
      * @param {UpdateProposalStatus} updateProposalStatus Payload to approve or decline a proposal
      * @param {*} [options] Override http request option.
@@ -21128,7 +21128,7 @@ export const PriceExperimentationApiAxiosParamCreator = function (configuration?
     return {
         /**
          * Calculate and return the revenue for a existing or new price plan
-         * @summary Calculate and return the revenue for a existing or new price plan
+         * @summary (DEPRECATED) Calculate and return the revenue for a existing or new price plan
          * @param {CalculateRevenueRequest} calculateRevenueRequest Request payload for calculateRevenueAPI
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21218,7 +21218,7 @@ export const PriceExperimentationApiFp = function(configuration?: Configuration)
     return {
         /**
          * Calculate and return the revenue for a existing or new price plan
-         * @summary Calculate and return the revenue for a existing or new price plan
+         * @summary (DEPRECATED) Calculate and return the revenue for a existing or new price plan
          * @param {CalculateRevenueRequest} calculateRevenueRequest Request payload for calculateRevenueAPI
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21254,7 +21254,7 @@ export const PriceExperimentationApiFactory = function (configuration?: Configur
     return {
         /**
          * Calculate and return the revenue for a existing or new price plan
-         * @summary Calculate and return the revenue for a existing or new price plan
+         * @summary (DEPRECATED) Calculate and return the revenue for a existing or new price plan
          * @param {CalculateRevenueRequest} calculateRevenueRequest Request payload for calculateRevenueAPI
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -21284,7 +21284,7 @@ export const PriceExperimentationApiFactory = function (configuration?: Configur
 export class PriceExperimentationApi extends BaseAPI {
     /**
      * Calculate and return the revenue for a existing or new price plan
-     * @summary Calculate and return the revenue for a existing or new price plan
+     * @summary (DEPRECATED) Calculate and return the revenue for a existing or new price plan
      * @param {CalculateRevenueRequest} calculateRevenueRequest Request payload for calculateRevenueAPI
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -22402,7 +22402,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * Activate a price plan details using price plan id
-         * @summary Activate a price plan
+         * @summary (DEPRECATED) Activate a price plan
          * @param {string} pricePlanId 
          * @param {ActivatePricePlanRequest} activatePricePlanRequest Payload to activate price plan
          * @param {*} [options] Override http request option.
@@ -22446,7 +22446,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Archive a price plan
-         * @summary Archive a price plan
+         * @summary (DEPRECATED) Archive a price plan
          * @param {string} pricePlanId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22484,7 +22484,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * This API let\'s you create and price plan Learn more about [Price Plans](https://docs.togai.com/docs/priceplan) 
-         * @summary Create a price plan
+         * @summary (DEPRECATED) Create a price plan
          * @param {CreatePricePlanRequest} createPricePlanRequest Payload to create price plan
          * @param {boolean} [dryRun] 
          * @param {*} [options] Override http request option.
@@ -22529,7 +22529,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Get a price plan details using price plan id
-         * @summary Get a price plan
+         * @summary (DEPRECATED) Get a price plan
          * @param {string} pricePlanId 
          * @param {number} [version] Optional version to get a specific version. Gets latest version if it is not provided.
          * @param {*} [options] Override http request option.
@@ -22572,7 +22572,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Get a list of price plans
-         * @summary List price plans
+         * @summary (DEPRECATED) List price plans
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
@@ -22616,7 +22616,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Migrates accounts across price plans. This is an asynchronous process functioning on top of Togai\'s Jobs  framework. Status of the created migrations can be obtained using the [Jobs APIs](https://docs.togai.com/api-reference/jobs/get-the-status-of-a-job) 
-         * @summary Create a price plan migration
+         * @summary (DEPRECATED) Create a price plan migration
          * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to create price plan migration request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22656,7 +22656,7 @@ export const PricePlansApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * Update an existing price plan Price Plans with status as DRAFT alone can be updated . Learn more about [Price plans](https://docs.togai.com/docs/priceplan) from our Guides 
-         * @summary Update a price plan
+         * @summary (DEPRECATED) Update a price plan
          * @param {string} pricePlanId 
          * @param {UpdatePricePlanRequest} updatePricePlanRequest Payload to update price plan
          * @param {*} [options] Override http request option.
@@ -22710,7 +22710,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Activate a price plan details using price plan id
-         * @summary Activate a price plan
+         * @summary (DEPRECATED) Activate a price plan
          * @param {string} pricePlanId 
          * @param {ActivatePricePlanRequest} activatePricePlanRequest Payload to activate price plan
          * @param {*} [options] Override http request option.
@@ -22724,7 +22724,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * Archive a price plan
-         * @summary Archive a price plan
+         * @summary (DEPRECATED) Archive a price plan
          * @param {string} pricePlanId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22737,7 +22737,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * This API let\'s you create and price plan Learn more about [Price Plans](https://docs.togai.com/docs/priceplan) 
-         * @summary Create a price plan
+         * @summary (DEPRECATED) Create a price plan
          * @param {CreatePricePlanRequest} createPricePlanRequest Payload to create price plan
          * @param {boolean} [dryRun] 
          * @param {*} [options] Override http request option.
@@ -22751,7 +22751,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get a price plan details using price plan id
-         * @summary Get a price plan
+         * @summary (DEPRECATED) Get a price plan
          * @param {string} pricePlanId 
          * @param {number} [version] Optional version to get a specific version. Gets latest version if it is not provided.
          * @param {*} [options] Override http request option.
@@ -22765,7 +22765,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get a list of price plans
-         * @summary List price plans
+         * @summary (DEPRECATED) List price plans
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
@@ -22779,7 +22779,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * Migrates accounts across price plans. This is an asynchronous process functioning on top of Togai\'s Jobs  framework. Status of the created migrations can be obtained using the [Jobs APIs](https://docs.togai.com/api-reference/jobs/get-the-status-of-a-job) 
-         * @summary Create a price plan migration
+         * @summary (DEPRECATED) Create a price plan migration
          * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to create price plan migration request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22792,7 +22792,7 @@ export const PricePlansApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update an existing price plan Price Plans with status as DRAFT alone can be updated . Learn more about [Price plans](https://docs.togai.com/docs/priceplan) from our Guides 
-         * @summary Update a price plan
+         * @summary (DEPRECATED) Update a price plan
          * @param {string} pricePlanId 
          * @param {UpdatePricePlanRequest} updatePricePlanRequest Payload to update price plan
          * @param {*} [options] Override http request option.
@@ -22816,7 +22816,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * Activate a price plan details using price plan id
-         * @summary Activate a price plan
+         * @summary (DEPRECATED) Activate a price plan
          * @param {string} pricePlanId 
          * @param {ActivatePricePlanRequest} activatePricePlanRequest Payload to activate price plan
          * @param {*} [options] Override http request option.
@@ -22827,7 +22827,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Archive a price plan
-         * @summary Archive a price plan
+         * @summary (DEPRECATED) Archive a price plan
          * @param {string} pricePlanId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22837,7 +22837,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * This API let\'s you create and price plan Learn more about [Price Plans](https://docs.togai.com/docs/priceplan) 
-         * @summary Create a price plan
+         * @summary (DEPRECATED) Create a price plan
          * @param {CreatePricePlanRequest} createPricePlanRequest Payload to create price plan
          * @param {boolean} [dryRun] 
          * @param {*} [options] Override http request option.
@@ -22848,7 +22848,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Get a price plan details using price plan id
-         * @summary Get a price plan
+         * @summary (DEPRECATED) Get a price plan
          * @param {string} pricePlanId 
          * @param {number} [version] Optional version to get a specific version. Gets latest version if it is not provided.
          * @param {*} [options] Override http request option.
@@ -22859,7 +22859,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Get a list of price plans
-         * @summary List price plans
+         * @summary (DEPRECATED) List price plans
          * @param {string} [nextToken] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
@@ -22870,7 +22870,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Migrates accounts across price plans. This is an asynchronous process functioning on top of Togai\'s Jobs  framework. Status of the created migrations can be obtained using the [Jobs APIs](https://docs.togai.com/api-reference/jobs/get-the-status-of-a-job) 
-         * @summary Create a price plan migration
+         * @summary (DEPRECATED) Create a price plan migration
          * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to create price plan migration request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -22880,7 +22880,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * Update an existing price plan Price Plans with status as DRAFT alone can be updated . Learn more about [Price plans](https://docs.togai.com/docs/priceplan) from our Guides 
-         * @summary Update a price plan
+         * @summary (DEPRECATED) Update a price plan
          * @param {string} pricePlanId 
          * @param {UpdatePricePlanRequest} updatePricePlanRequest Payload to update price plan
          * @param {*} [options] Override http request option.
@@ -22901,7 +22901,7 @@ export const PricePlansApiFactory = function (configuration?: Configuration, bas
 export class PricePlansApi extends BaseAPI {
     /**
      * Activate a price plan details using price plan id
-     * @summary Activate a price plan
+     * @summary (DEPRECATED) Activate a price plan
      * @param {string} pricePlanId 
      * @param {ActivatePricePlanRequest} activatePricePlanRequest Payload to activate price plan
      * @param {*} [options] Override http request option.
@@ -22914,7 +22914,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * Archive a price plan
-     * @summary Archive a price plan
+     * @summary (DEPRECATED) Archive a price plan
      * @param {string} pricePlanId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -22926,7 +22926,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * This API let\'s you create and price plan Learn more about [Price Plans](https://docs.togai.com/docs/priceplan) 
-     * @summary Create a price plan
+     * @summary (DEPRECATED) Create a price plan
      * @param {CreatePricePlanRequest} createPricePlanRequest Payload to create price plan
      * @param {boolean} [dryRun] 
      * @param {*} [options] Override http request option.
@@ -22939,7 +22939,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * Get a price plan details using price plan id
-     * @summary Get a price plan
+     * @summary (DEPRECATED) Get a price plan
      * @param {string} pricePlanId 
      * @param {number} [version] Optional version to get a specific version. Gets latest version if it is not provided.
      * @param {*} [options] Override http request option.
@@ -22952,7 +22952,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * Get a list of price plans
-     * @summary List price plans
+     * @summary (DEPRECATED) List price plans
      * @param {string} [nextToken] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
@@ -22965,7 +22965,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * Migrates accounts across price plans. This is an asynchronous process functioning on top of Togai\'s Jobs  framework. Status of the created migrations can be obtained using the [Jobs APIs](https://docs.togai.com/api-reference/jobs/get-the-status-of-a-job) 
-     * @summary Create a price plan migration
+     * @summary (DEPRECATED) Create a price plan migration
      * @param {CreatePricePlanMigrationRequest} createPricePlanMigrationRequest Payload to create price plan migration request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -22977,7 +22977,7 @@ export class PricePlansApi extends BaseAPI {
 
     /**
      * Update an existing price plan Price Plans with status as DRAFT alone can be updated . Learn more about [Price plans](https://docs.togai.com/docs/priceplan) from our Guides 
-     * @summary Update a price plan
+     * @summary (DEPRECATED) Update a price plan
      * @param {string} pricePlanId 
      * @param {UpdatePricePlanRequest} updatePricePlanRequest Payload to update price plan
      * @param {*} [options] Override http request option.
@@ -22999,7 +22999,7 @@ export const PricingRulesApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * Get a list of pricing rules using price plan id and pricing schedule id
-         * @summary List pricing rules by price plan id and pricing schedule id
+         * @summary (DEPRECATED) List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
          * @param {ListPricingRulesByScheduleIdInvoiceTimingEnum} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
@@ -23056,7 +23056,7 @@ export const PricingRulesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Get a list of pricing rules using price plan id and pricing schedule id
-         * @summary List pricing rules by price plan id and pricing schedule id
+         * @summary (DEPRECATED) List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
          * @param {ListPricingRulesByScheduleIdInvoiceTimingEnum} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
@@ -23081,7 +23081,7 @@ export const PricingRulesApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * Get a list of pricing rules using price plan id and pricing schedule id
-         * @summary List pricing rules by price plan id and pricing schedule id
+         * @summary (DEPRECATED) List pricing rules by price plan id and pricing schedule id
          * @param {string} pricePlanId 
          * @param {string} pricingScheduleId 
          * @param {ListPricingRulesByScheduleIdInvoiceTimingEnum} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
@@ -23103,7 +23103,7 @@ export const PricingRulesApiFactory = function (configuration?: Configuration, b
 export class PricingRulesApi extends BaseAPI {
     /**
      * Get a list of pricing rules using price plan id and pricing schedule id
-     * @summary List pricing rules by price plan id and pricing schedule id
+     * @summary (DEPRECATED) List pricing rules by price plan id and pricing schedule id
      * @param {string} pricePlanId 
      * @param {string} pricingScheduleId 
      * @param {ListPricingRulesByScheduleIdInvoiceTimingEnum} [invoiceTiming] Optional field to filter pricing rules based on invoice timing
