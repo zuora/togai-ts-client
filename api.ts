@@ -21363,10 +21363,11 @@ export const PricePlanV2ApiAxiosParamCreator = function (configuration?: Configu
          * Create a price plan
          * @summary Create a price plan
          * @param {CreatePricePlanV2Request} createPricePlanV2Request Payload to create price plan
+         * @param {string} [sourcePricePlanId] The source price plan id to be used as a reference for creating a new price plan. This is optional and can be used to copy the pricing rules and rate cards from the source price plan. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPricePlanV2: async (createPricePlanV2Request: CreatePricePlanV2Request, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createPricePlanV2: async (createPricePlanV2Request: CreatePricePlanV2Request, sourcePricePlanId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createPricePlanV2Request' is not null or undefined
             assertParamExists('createPricePlanV2', 'createPricePlanV2Request', createPricePlanV2Request)
             const localVarPath = `/v2/price_plans`;
@@ -21384,6 +21385,10 @@ export const PricePlanV2ApiAxiosParamCreator = function (configuration?: Configu
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (sourcePricePlanId !== undefined) {
+                localVarQueryParameter['source_price_plan_id'] = sourcePricePlanId;
+            }
 
 
     
@@ -21901,11 +21906,12 @@ export const PricePlanV2ApiFp = function(configuration?: Configuration) {
          * Create a price plan
          * @summary Create a price plan
          * @param {CreatePricePlanV2Request} createPricePlanV2Request Payload to create price plan
+         * @param {string} [sourcePricePlanId] The source price plan id to be used as a reference for creating a new price plan. This is optional and can be used to copy the pricing rules and rate cards from the source price plan. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricePlanV2>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createPricePlanV2(createPricePlanV2Request, options);
+        async createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, sourcePricePlanId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricePlanV2>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createPricePlanV2(createPricePlanV2Request, sourcePricePlanId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PricePlanV2Api.createPricePlanV2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -22088,11 +22094,12 @@ export const PricePlanV2ApiFactory = function (configuration?: Configuration, ba
          * Create a price plan
          * @summary Create a price plan
          * @param {CreatePricePlanV2Request} createPricePlanV2Request Payload to create price plan
+         * @param {string} [sourcePricePlanId] The source price plan id to be used as a reference for creating a new price plan. This is optional and can be used to copy the pricing rules and rate cards from the source price plan. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, options?: RawAxiosRequestConfig): AxiosPromise<PricePlanV2> {
-            return localVarFp.createPricePlanV2(createPricePlanV2Request, options).then((request) => request(axios, basePath));
+        createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, sourcePricePlanId?: string, options?: RawAxiosRequestConfig): AxiosPromise<PricePlanV2> {
+            return localVarFp.createPricePlanV2(createPricePlanV2Request, sourcePricePlanId, options).then((request) => request(axios, basePath));
         },
         /**
          * Discard a price plan
@@ -22241,12 +22248,13 @@ export class PricePlanV2Api extends BaseAPI {
      * Create a price plan
      * @summary Create a price plan
      * @param {CreatePricePlanV2Request} createPricePlanV2Request Payload to create price plan
+     * @param {string} [sourcePricePlanId] The source price plan id to be used as a reference for creating a new price plan. This is optional and can be used to copy the pricing rules and rate cards from the source price plan. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PricePlanV2Api
      */
-    public createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, options?: RawAxiosRequestConfig) {
-        return PricePlanV2ApiFp(this.configuration).createPricePlanV2(createPricePlanV2Request, options).then((request) => request(this.axios, this.basePath));
+    public createPricePlanV2(createPricePlanV2Request: CreatePricePlanV2Request, sourcePricePlanId?: string, options?: RawAxiosRequestConfig) {
+        return PricePlanV2ApiFp(this.configuration).createPricePlanV2(createPricePlanV2Request, sourcePricePlanId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
