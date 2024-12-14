@@ -9981,7 +9981,7 @@ export interface RateCardOperation {
      */
     'actionType': RateCardOperationActionTypeEnum;
     /**
-     * Required for UPDATE and DELETE operations
+     * Name of rate card
      * @type {string}
      * @memberof RateCardOperation
      */
@@ -9997,7 +9997,8 @@ export interface RateCardOperation {
 export const RateCardOperationActionTypeEnum = {
     Create: 'CREATE',
     Update: 'UPDATE',
-    Delete: 'DELETE'
+    Delete: 'DELETE',
+    Upsert: 'UPSERT'
 } as const;
 
 export type RateCardOperationActionTypeEnum = typeof RateCardOperationActionTypeEnum[keyof typeof RateCardOperationActionTypeEnum];
